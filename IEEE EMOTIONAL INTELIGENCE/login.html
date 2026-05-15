@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/254f436bca.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <!-- login div -->
+    <div class="loginblock">
+      <!--  image div-->
+      <div class="loginimage">
+        <img src="images/login.png" alt="brainimage" />
+      </div>
+      <!--  text div -->
+      <div class="logininfo">
+        <h4>Login</h4>
+        <label for="mail">Email:</label>
+        <input id="mail" type="email" name="email" placeholder="Enter Email " />
+        <label for="pswrd">Password:</label>
+        <div class="eyeoption">
+          <input
+            id="pswrd"
+            type="password"
+            name="password"
+            placeholder="Enter Password "
+            autocomplete="new-password"
+          />
+          <i class="fa-solid fa-eye-low-vision" onclick="seepassword()"></i>
+          <i class="fa-solid fa-eye" onclick="hidepasswrd()"></i>
+        </div>
+        <a href="forget password.html" class="forgetpsw">forget Password?</a>
+        <button id="login" onclick="gotohome()" type="submit">Login</button>
+        <p
+          style="text-align: left; color: rgb(228, 173, 173)"
+          id="errormsg"
+        ></p>
+        <p>
+          Don't have an account?
+          <a id="linked" href="register.html" style="text-decoration: underline"
+            >Register</a
+          >
+        </p>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>

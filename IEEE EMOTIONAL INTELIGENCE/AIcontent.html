@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Driven Content</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- lesson -->
+    <div id="lesson">
+      <header>
+        <div class="dbheading">
+          <img src="images/logo.png" />
+          <h3>Emotional Intelligence</h3>
+        </div>
+        <h4>Lesson Completed <input type="checkbox" /></h4>
+      </header>
+      <a href="dashboard.html"
+        ><div class="backbtn"><img src="images/arrow.png" alt="" /></div
+      ></a>
+      <div class="lessoncontent">
+        <h2>Understanding Emotional Awareness</h2>
+
+        <p>
+          Emotional awareness is the ability to recognize what you are feeling
+          in the moment and understand why you are feeling it. Instead of
+          reacting instantly, it helps you pause, reflect, and respond wisely.
+        </p>
+
+        <h4>Key Insights</h4>
+        <ul>
+          <li>Every emotion has a trigger — identify it.</li>
+          <li>Your reaction is a choice, not a habit.</li>
+          <li>Naming your emotion reduces its intensity.</li>
+        </ul>
+
+        <h4>Try This</h4>
+        <p>
+          Next time you feel stressed, pause and ask yourself:
+          <b>“What exactly am I feeling right now?”</b>
+        </p>
+
+        <button class="btn">Mark as Completed ✔</button>
+      </div>
+    </div>
+    <!--acitivites  -->
+    <div id="Activities">
+      <header>
+        <div class="dbheading">
+          <img
+            src="images/logo.png"
+            style="
+              width: 80px;
+              height: 50px;
+              border-radius: 50%;
+              border: 1px solid #085041;
+            "
+          />
+          <h3>Emotional Intelligence</h3>
+        </div>
+        <h4>Progress completed:<span>0/5</span></h4>
+      </header>
+      <!-- back btn -->
+      <a href="dashboard.html"
+        ><div class="backbtn"><img src="images/arrow.png" alt="" /></div
+      ></a>
+      <!-- content -->
+      <div class="ActivityContent">
+        <h2>Daily Emotional Practice</h2>
+
+        <p>
+          Complete these real-life activities today. These are designed to
+          improve your emotional intelligence through action, not just theory.
+        </p>
+
+        <div class="task">
+          <input type="checkbox" />
+          <label>
+            Pause before reacting in a stressful situation and take 3 deep
+            breaths.
+          </label>
+        </div>
+
+        <div class="task">
+          <input type="checkbox" />
+          <label>
+            Notice one emotion you felt today and write down what caused it.
+          </label>
+        </div>
+
+        <div class="task">
+          <input type="checkbox" />
+          <label>
+            Actively listen to someone without interrupting or judging.
+          </label>
+        </div>
+
+        <div class="task">
+          <input type="checkbox" />
+          <label> Do one small act of kindness for someone. </label>
+        </div>
+
+        <div class="task">
+          <input type="checkbox" />
+          <label>
+            Reflect on your day: What did you handle well emotionally?
+          </label>
+        </div>
+
+        <button class="btn">Submit Today's Progress</button>
+      </div>
+    </div>
+    <!-- quiz -->
+
+    <div id="quizez">
+      <header>
+        <div class="dbheading">
+          <img
+            src="images/logo.png"
+            style="
+              width: 80px;
+              height: 50px;
+              border-radius: 50%;
+              border: 1px solid #085041;
+            "
+          />
+          <h3>Emotional Intelligence</h3>
+        </div>
+
+        <div class="questioncount">
+          <h3><span>0/</span>questions</h3>
+          <div class="questionbar">
+            <div class="fill"></div>
+          </div>
+        </div>
+      </header>
+      <!-- back btn -->
+      <a href="dashboard.html"
+        ><div class="backbtn"><img src="images/arrow.png" alt="" /></div
+      ></a>
+
+      <!-- content -->
+      <div class="QuizContent">
+        <h2>Emotional Intelligence Quiz</h2>
+
+        <p>
+          <b>Q1:</b> When I feel overwhelmed, I am aware of what is causing it.
+        </p>
+
+        <label><input type="radio" name="q1" /> Strongly Agree</label><br />
+        <label><input type="radio" name="q1" /> Agree</label><br />
+        <label><input type="radio" name="q1" /> Neutral</label><br />
+        <label><input type="radio" name="q1" /> Disagree</label><br />
+        <label><input type="radio" name="q1" /> Strongly Disagree</label><br />
+
+        <br />
+
+        <p>
+          <b>Q2:</b> I can stay calm even in difficult or frustrating
+          situations.
+        </p>
+
+        <label><input type="radio" name="q2" /> Strongly Agree</label><br />
+        <label><input type="radio" name="q2" /> Agree</label><br />
+        <label><input type="radio" name="q2" /> Neutral</label><br />
+        <label><input type="radio" name="q2" /> Disagree</label><br />
+        <label><input type="radio" name="q2" /> Strongly Disagree</label><br />
+
+        <button class="btn">Next</button>
+      </div>
+    </div>
+    <script>
+      const quizezpage = document.getElementById("quizez");
+      const Activitiespage = document.getElementById("Activities");
+      const lessonpage = document.getElementById("lesson");
+
+      function show(page) {
+        lessonpage.style.display = "none";
+        Activitiespage.style.display = "none";
+        quizezpage.style.display = "none";
+        document.getElementById(page).style.display = "block";
+      }
+      let params = new URLSearchParams(window.location.search);
+      let tab = params.get("tab");
+      if (tab) {
+        show(tab);
+      } else {
+        show("lessoncontent");
+      }
+    </script>
+  </body>
+</html>

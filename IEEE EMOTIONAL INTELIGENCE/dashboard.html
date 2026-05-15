@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/254f436bca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- header -->
+    <header>
+      <div class="dbheading">
+        <img src="images/logo.png" />
+        <h3>Emotional Intelligence</h3>
+      </div>
+      <h4>Welcome <span class="u_name"></span></h4>
+
+      <button id="menuitem">
+        <i class="fa-solid fa-bars" id="menuitem"></i>
+      </button>
+      <nav>
+        <img id="cross" src="images/remove.png" alt="" />
+
+        <ul>
+          <li><a href="welcomepage.html">Home</a></li>
+          <li><a href="aboutus.html">About us</a></li>
+          <li><a href="home.html">Service</a></li>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- profile -->
+    <div class="dashboardbody">
+      <div class="profile">
+        <h4>My Profile</h4>
+        <div class="pic"><img id="profile_picture" src="" /></div>
+        <label for="pictureupload" id="dashboardpic"
+          >Upload picture
+          <input id="pictureupload" type="file" hidden />
+        </label>
+        <p class="u_name"></p>
+        <p>Email<span id="emailaddress"></span></p>
+        <p>EQ level: <span id="eqlevel"></span></p>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+      <!-- score and progress bar -->
+      <div class="rightsidegrid">
+        <div class="gridbox">
+          <div class="testingresult">
+            <div class="scores">
+              <h4>Total Score</h4>
+              <div class="circle">
+                <div class="inner">0%</div>
+              </div>
+              <p>
+                Your Eq score is
+                <span class="scoreremark">Good</span>.
+              </p>
+            </div>
+            <div class="scorebars">
+              <h4>Strengths</h4>
+              <p>Social Skills</p>
+              <div class="socialskills">
+                <div class="skillbar">
+                  <div class="fill"></div>
+                </div>
+                <span id="score1">0%</span>
+              </div>
+              <p>Emotional Regulation</p>
+              <div class="emotionalregulation">
+                <div class="regulationbar">
+                  <div class="fill"></div>
+                </div>
+                <span id="score2">0%</span>
+              </div>
+              <p>Self Awareness</p>
+              <div class="selefawareness">
+                <div class="awarebar">
+                  <div class="fill"></div>
+                </div>
+                <span id="score3">0%</span>
+              </div>
+              <p>Empathy</p>
+              <div class="emphtyscore">
+                <div class="emphatybar">
+                  <div class="fill"></div>
+                </div>
+                <span id="score4">0%</span>
+              </div>
+            </div>
+          </div>
+          <!-- progess div -->
+          <div class="Progressmade">
+            <h4>My Progress</h4>
+            <div class="progresscontainer">
+              <div class="card emootional">
+                <div class="remarkingbox">
+                  <img src="images/emotional-regulation (1).png" alt="pic" />
+                  <p class="emotional-remark">Strong</p>
+                </div>
+                <h5>Emotional Regulation</h5>
+              </div>
+              <div class="card discussion">
+                <div class="remarkingbox">
+                  <img src="images/discussion.png" alt="pic" />
+                  <p class="discussion-remark">improving</p>
+                </div>
+                <h5>Social Skills</h5>
+              </div>
+              <div class="card awareness">
+                <div class="remarkingbox">
+                  <img src="images/self-awareness.png" alt="" />
+                  <p class="awareness-remark">Weak</p>
+                </div>
+                <h5>Self Awareness</h5>
+              </div>
+              <div class="card esteem">
+                <div class="remarkingbox">
+                  <img src="images/self-esteem.png" alt="" />
+                  <p class="esteem-remark">Good</p>
+                </div>
+                <h5>Building Empathy</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tasks">
+          <div id="lesson" class="lesson">
+            <img src="images/education (1).png" alt="quizez" />
+            <p>
+              Get personalized lessons generated by AI based on your progress.
+            </p>
+            <span>5 New Lessons</span>
+            <button onclick="gotoAipage('lesson')">Get Lesson</button>
+          </div>
+          <div id="Activities" class="Activities">
+            <img src="images/mental-health.png" alt="" />
+            <p>
+              Practice daily activities to build emotional awareness and skills.
+            </p>
+            <span>3 New Activities</span>
+            <button onclick="gotoAipage('Activities')">Start Activity</button>
+          </div>
+          <div id="quizez" class="quizez">
+            <img src="images/brain.png" alt="" />
+            <p>
+              Test your emotional intelligence with engaging quiz questions.
+            </p>
+            <span>9 New Questions </span>
+            <button onclick="gotoAipage('quizez')">Start Quiz</button>
+          </div>
+          <div class="btmspace"></div>
+        </div>
+      </div>
+    </div>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>about us</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/254f436bca.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="dbheading">
+        <img src="images/logo.png" />
+        <h3>Emotional Intelligence</h3>
+      </div>
+
+      <button id="menuitem">
+        <i class="fa-solid fa-bars" id="menuitem"></i>
+      </button>
+      <nav>
+        <img id="cross" src="images/remove.png" alt="" />
+
+        <ul>
+          <li><a href="welcomepage.html">Home</a></li>
+          <li><a href="aboutus.html" class="active">About us</a></li>
+          <li><a href="home.html">Service</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- banner hero section -->
+    <div class="banner">
+      <img src="images/bannerr.png" alt="bannerimage" />
+      <div class="bannerbox">
+        <h1>About EQ Emotional Intelligence Lab</h1>
+        <p>Understanding emotions, shaping better lives</p>
+        <p>
+          EQ Lab helps you measure & improve your emotional intelligence using
+          interactive tools & insights.
+        </p>
+        <a href="home.html" style="width: 40%; margin: 0 auto" class="banerbtn"
+          ><button>Start Assessment</button></a
+        >
+      </div>
+    </div>
+    <!-- our into -->
+    <div class="whoweare">
+      <div class="whoweareboxex">
+        <div class="textbox">
+          <h2>Who We Are</h2>
+          <p>
+            EQ Lab is a modern emotional intelligence platform designed to help
+            individuals understand their emotions, behavior, and mental
+            patterns.Through research-based tools, interactive learning, and
+            practical exercises, we focus on developing key skills like
+            self-awareness, emotional regulation, empathy, and better
+            decision-making. Our goal is to empower people to grow emotionally
+            strong, improve relationships, and perform better in both personal
+            and professional life by turning emotional understanding into
+            everyday practice.
+          </p>
+        </div>
+        <div class="picbox">
+          <img src="images/weare.png" alt="picture " />
+        </div>
+      </div>
+    </div>
+
+    <!--our mission  -->
+    <div class="ourmission">
+      <h2>Our Mission</h2>
+      <div class="missioncards">
+        <div class="misioncard">
+          <img src="images/mirror (1).png" alt="" />
+          <h3>Self Awareness</h3>
+          <p>Understand your emotions and thoughts clearly.</p>
+        </div>
+        <div class="misioncard">
+          <img src="images/growth.png" alt="" />
+          <h3>Emotional Growth</h3>
+          <p>Improve how you manage and express emotions.</p>
+        </div>
+        <div class="misioncard">
+          <img src="images/wellbeing.png" alt="" />
+          <h3>Mental Well-being</h3>
+          <p>Maintain a healthy and balanced mind.</p>
+        </div>
+        <div class="misioncard">
+          <img src="images/evaluation.png" alt="" />
+          <h3>Better Decision Making</h3>
+          <p>Make smarter choices with emotional clarity.</p>
+        </div>
+      </div>
+    </div>
+    <!-- our vision -->
+    <div class="vision">
+      <div class="visionbox">
+        <h2>Our Vision</h2>
+        <p>
+          " To build emotionally intelligent individuals for a better and
+          healthier society."
+        </p>
+      </div>
+    </div>
+
+    <!--  -->
+    <script>
+      let navbar = document.getElementById("menuitem");
+      let nav = document.getElementsByTagName("nav")[0];
+      let removebar = document.getElementById("cross");
+      navbar.addEventListener("click", () => {
+        nav.style.transform = "translateX(-160px)";
+      });
+      removebar.addEventListener("click", () => {
+        nav.style.transform = "translateX(0)";
+      });
+    </script>
+  </body>
+</html>

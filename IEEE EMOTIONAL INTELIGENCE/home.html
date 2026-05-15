@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home page</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/254f436bca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- heading para -->
+    <header>
+      <div class="dbheading">
+        <img src="images/logo.png" />
+        <h3>Emotional Intelligence</h3>
+      </div>
+      <button id="menuitem">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav>
+        <img id="cross" src="images/remove.png" alt="" />
+        <ul>
+          <li><a href="welcomepage.html">Home</a></li>
+          <li><a href="aboutus.html">About us</a></li>
+          <li><a href="home.html" class="active">Service</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- heading and text -->
+    <div class="introduction">
+      <div class="testcontainer">
+        <div class="testintro">
+          <h1>Discover Where You Stand with a Free EQ Test</h1>
+          <p>
+            In just a few minutes, get a detailed breakdown of your emotional
+            strengths and areas for growth — then start building from there.
+          </p>
+          <div class="stepone">
+            <div class="number"><img src="images/math.png" alt="one" /></div>
+            <div class="number-content">
+              <h4>Answer 15 situational questions</h4>
+              <p>
+                Honest, scenario-based questions about how you feel and respond
+              </p>
+            </div>
+          </div>
+          <div class="steptwo">
+            <div class="number"><img src="images/two.png" alt="two" /></div>
+            <div class="number-content">
+              <h4>Get your EQ score & profile</h4>
+              <p>
+                See your scores across empathy, self-control, awareness, and
+                more
+              </p>
+            </div>
+          </div>
+          <div class="stepthree">
+            <div class="number"><img src="images/three.png" alt="three" /></div>
+            <div class="number-content">
+              <h4>Start your personalized learning path</h4>
+              <p>Start your personalized learning path by Unlock modules.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testcard">
+        <div class="starttest">
+          <h1>Take Your First EQ Test</h1>
+          <p>Discover your emotional strengths</p>
+          <p>Complete your first test to unlock insights</p>
+          <p>Free - Takes 5 minutes Instant results</p>
+          <a href="quiz.html"><button class="test">Start Test</button></a>
+        </div>
+      </div>
+    </div>
+    <script>
+      let navbar = document.getElementById("menuitem");
+      let nav = document.getElementsByTagName("nav")[0];
+      let removebar = document.getElementById("cross");
+      navbar.addEventListener("click", () => {
+        nav.style.transform = "translateX(-160px)";
+      });
+      removebar.addEventListener("click", () => {
+        nav.style.transform = "translateX(0)";
+      });
+    </script>
+  </body>
+</html>
