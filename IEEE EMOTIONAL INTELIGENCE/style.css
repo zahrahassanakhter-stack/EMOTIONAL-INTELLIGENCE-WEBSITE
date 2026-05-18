@@ -11,21 +11,37 @@
 }
 
 :root {
-  --backgroundcolor: #c9e3de;
+  --backgroundcolor: #eefff6;
   --headercolor: #194342;
-  --dashboard-cards: white;
   --fontcolor: black;
-  --btncolor: #d0f0c0;
-  --color: white;
-  --bordercolor: 1px solid #194342;
+  --btncolor: linear-gradient(135deg, #2d5016, #5c8a3c);
+  --btnfontcolor: white;
+  --color: #2d5016;
+  --bordercolor: 1px solid rgba(255, 255, 255, 0.18);
+  --boxshadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  /* Glass background circles */
+  --circle1: rgba(25, 67, 66, 0.12);
+  --circle2: rgba(208, 240, 192, 0.25);
+  /* cards */
+  --glassbg-color: rgba(255, 255, 255, 0.55);
+  --backdropfilter: blur(20px);
 }
 
 body {
-  background: var(--warm-white);
-  color: var(--text-dark);
-  background-size: cover;
+  background-color: var(--backgroundcolor);
+  background-image:
+    radial-gradient(circle at top right, var(--circle1) 0%, transparent 50%),
+    radial-gradient(circle at bottom left, var(--circle2) 0%, transparent 50%),
+    linear-gradient(
+      135deg,
+      var(--backgroundcolor) 0%,
+      #f4fcfa 50%,
+      #e9fbf8 100%
+    );
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
 /* welcome page */
 #menuitem {
   display: none;
@@ -47,13 +63,14 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #ffffff;
+  color: var(--color);
   padding: 10px;
   transition: width 1s;
   text-decoration: none;
   font-size: 17px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
 }
 nav ul li a:hover {
   background-color: var(--btncolor);
@@ -101,9 +118,6 @@ nav ul li a.active::after {
   font-weight: bold;
   margin-top: 19%;
   margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-
   color: var(--headercolor);
 }
 @keyframes zoomin {
@@ -117,22 +131,22 @@ nav ul li a.active::after {
 }
 .description {
   width: 90%;
-  font-size: 24px;
-  color: black;
+  font-size: 20px;
+  color: #6b8a6b;
   margin: 10px 0;
 }
-.btns {
-  width: 60%;
+.introbox a {
+  width: 50%;
   height: auto;
-  margin: 20px 0;
+  margin: 10px 0;
 }
-.btns .loginbtn {
+a .loginbtn {
   font-size: 17px;
   padding: 10px 15px;
   border-radius: 30px;
   text-decoration: none;
-  color: var(--color);
-  background: var(--headercolor);
+  color: var(--btnfontcolor);
+  background: var(--btncolor);
   border: NONE;
 }
 a {
@@ -140,8 +154,7 @@ a {
 }
 
 .loginbtn:hover {
-  background-color: #89aeb5;
-  color: rgb(3, 79, 51);
+  transform: translatey();
 }
 
 .welcomebox img {
@@ -383,75 +396,58 @@ button:hover {
 /* about us page */
 .banner {
   width: 100%;
-  height: 450px;
-}
-.banner img {
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
+  height: 200px;
+  margin: 60px auto;
 }
 
 .bannerbox {
-  width: 40%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 50%;
+  margin: auto;
 }
 .bannerbox h1 {
+  margin: auto;
+  font-size: 40px;
+  width: 80%;
   text-align: center;
 }
 .bannerbox p {
   margin: 10px 0;
-  font-weight: bold;
   text-align: center;
+  color: var(--color);
 }
-.bannerbox a button {
-  font-weight: bold;
-  width: 40%;
-  margin: 10px auto;
+.bannerbox .banerbtn {
+  width: 20%;
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
+  color: var(--btnfontcolor);
   background: var(--btncolor);
   border: var(--bordercolor);
-  margin: 5px auto;
+  margin: auto;
   position: absolute;
-  left: 30%;
+  left: 40%;
+  transition: 0.5s linear;
+  cursor: pointer;
 }
-a button:hover {
-  background-color: rgb(135, 192, 192);
-  color: rgb(3, 79, 51);
-}
-.ourmission {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-}
-.ourmission h2 {
-  text-align: center;
-}
-.missioncards {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 10px 0;
-}
-.misioncard {
-  width: 23%;
-  border: var(--bordercolor);
-  padding: 20px;
-  background-color: white;
-  border-radius: 20px;
+.banerbtn:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--boxshadow);
 }
 .whoweare {
-  margin: 10px;
-  padding: 10px;
+  margin: 30px auto;
+  width: 90%;
+  background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  box-shadow: var(--boxshadow);
+  border: var (--bordercolor);
+  border-radius: 20px;
 }
 
 .whoweare .whoweareboxex {
   display: flex;
-  padding: 10px 30px;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255, 0.4);
 }
 .whoweare .picbox img {
   height: 100%;
@@ -461,6 +457,7 @@ a button:hover {
   width: 40%;
   padding: 20px;
   margin-right: 10px;
+  color: var(--color);
 }
 .textbox h2 {
   text-align: center;
@@ -470,101 +467,138 @@ a button:hover {
   width: 60%;
   height: 300px;
 }
-.vision {
-  position: relative;
-  width: 100%;
-  margin: 10px 0 0 0;
-  height: 100px;
-  background-color: #93bfbe;
+/* mission */
+.ourmission {
+  margin: 30px auto;
+  padding: 0;
+  width: 90%;
+  border-radius: 20px;
 }
-.visionbox {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.visionbox h2 {
+.ourmission h2 {
   text-align: center;
 }
-/* home page */
-.introduction {
+.missioncards {
   display: flex;
-  padding: 10px 30px;
-  margin: 10px;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.misioncard {
+  width: 24%;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255);
+  background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border-radius: 20px;
+  border: var(--bordercolor);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  transition: 0.3s linear;
+}
+.misioncard:hover {
+  transform: translateY(-5px);
+}
+.misioncard img,
+h3,
+p {
+  text-align: left;
+  margin: 10px 0;
+}
+/* visiona */
+.vision {
+  margin: 30px auto;
+  width: 90%;
+  padding: 20px 0px;
+  border-radius: 20px;
+  background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  box-shadow: var(--boxshadow);
+  border-color: var(--bordercolor);
+}
+.visionbox {
+  margin: auto;
+  width: 50%;
+}
+.visionbox h2,
+p {
+  padding: 5px 0;
+  text-align: center;
+}
+.visionbox .visnstatement {
+  color: var(--color);
+}
+
+/* home page */
+.testinstruction {
+  margin: 60px auto;
+  width: 50%;
+}
+.testinstruction .testheading {
+  text-align: center;
+  font-size: 40px;
+  width: 90%;
+  margin: auto;
+}
+.testinstruction .teststatement {
+  color: var(--color);
+  text-align: center;
+}
+.introduction {
+  padding: 0 30px;
+  margin: 30px;
   height: auto;
+  display: flex;
 }
 .testcontainer {
   width: 50%;
 }
 .testintro {
   margin: 0 auto;
-  width: 70%;
+  width: 60%;
   text-align: left;
+  background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  box-shadow: var(--boxshadow);
+  border: var(--bordercolor);
+  padding: 22px;
+  border-radius: 20px;
 }
-.testintro h1 {
-  color: var(--headercolor);
-  font-size: x-large;
-}
-.testintro p {
-  color: black;
-  font-size: large;
-  padding: 10px 0;
-}
+
 .testintro .stepone {
-  box-shadow: 0 0 25px black;
-  color: rgb(23, 17, 17);
   display: flex;
   text-align: left;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 20px;
-  background-color: white;
 }
 .stepone h4,
 .steptwo h4,
 .stepthree h4 {
   text-align: left;
+  padding-top: 10px;
 }
 .stepone p,
 .steptwo p,
 .stepthree p {
   color: rgb(85, 83, 83);
+  padding: 0;
+  /* margin: 0; */
 }
 .number {
   width: 15%;
 }
 .number img {
-  margin: 0 10px;
-
+  margin: 11px 0;
   border-radius: 50%;
 }
 .number-content {
   width: 85%;
 }
 .testintro .steptwo {
-  box-shadow: 0 0 25px black;
-  color: black;
   display: flex;
   text-align: left;
-  border-radius: 20px;
-  width: auto;
-  height: auto;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: white;
 }
+
 .testintro .stepthree {
-  box-shadow: 0 0 25px black;
-  color: black;
   display: flex;
   text-align: left;
-  border-radius: 20px;
-  width: auto;
-  height: auto;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: white;
 }
+/* right side */
 .testcard {
   width: 50%;
   height: auto;
@@ -576,57 +610,60 @@ p {
 }
 
 .starttest {
-  width: 40%;
+  width: 60%;
   height: auto;
-  margin: 20px auto;
-  background-color: var(--headercolor);
+  margin: auto;
+  background-color: var(--color);
+  backdrop-filter: var(--backdropfilter);
   border-radius: 20px;
-  box-shadow: 0 0 25px black;
-  padding: 40px;
-  color: var(--color);
+  box-shadow: var(--boxshadow);
+  padding: 30px;
+  color: var(--btnfontcolor);
   text-align: center;
   font-size: 15px;
 }
-.starttest p {
-  padding: 10px;
+
+.starttest ul {
+  text-align: left;
+  padding: 10px 20px;
 }
-.starttest .test {
-  background: var(--btncolor);
+
+.starttest .testbtn {
+  background: rgb(255, 255, 255, 0.4);
   border: var(--bordercolor);
-  border-radius: 20px;
-  width: 90%;
+  border-radius: 10px;
+  width: 100%;
   padding: 20px;
   font-size: 15px;
   font-weight: bold;
 }
-.starttest .test:hover {
-  background-color: rgb(135, 192, 192);
+.starttest .testbtn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(196, 238, 208, 0.2);
 }
 .starttest p,
-.test {
+.testbtn {
   margin: 10px auto;
 }
 
 /* quiz page */
 .mcqs {
-  width: 75%;
-  height: 79%;
+  width: 70%;
+  height: 47 0px;
   position: absolute;
-  top: 53%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px 50px 20px 50px;
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
   border-radius: 20px;
-  scrollbar-width: none;
-  background-color: var(--headercolor);
+  background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  box-shadow: var(--boxshadow);
   border: var(--bordercolor);
 }
+/* bar */
 .questioncount {
-  width: 23%;
+  width: 25%;
   border-radius: 10%;
   padding: 10px;
   color: var(--color);
@@ -635,77 +672,113 @@ p {
   align-items: center;
   gap: 10px;
 }
+#question_count {
+  display: inline;
+}
 .questionbar {
   height: 7px;
   width: 70%;
-  background-color: var(--color);
+  background-color: white;
 }
 .questionbar .fill {
-  background-color: #c7d829;
+  background-color: var(--color);
   width: 1%;
   height: 100%;
 }
+/* backbtn */
 .backbtn {
-  padding: 10px 30px;
+  margin: 10px 20px;
+  display: inline-block;
 }
-.backbtn img {
-  width: 45px;
+.backbtn #left {
   padding: 10px;
-  background-color: #275a59;
+  font-size: larger;
+  color: white;
+
+  background-color: var(--color);
   border-radius: 50%;
-  transition: width 0 linear 1s;
+  transition: 0.4 linear 1s;
 }
-.backbtn img:hover {
-  background-color: #93bfbe;
+.backbtn #left:hover {
+  box-shadow: var(--boxshadow);
   transform: scale(1.1);
 }
-.mcqs .submit {
-  width: 95.5%;
+/* submit buttn */
+.quiz-buttons {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.quiz-buttons .backtoold {
+  width: 90px;
   font-size: 15px;
   font-weight: bold;
   align-items: center;
-  margin: 0 20px;
-  padding: 10px;
-  background: var(--btncolor);
-  border: var(--bordercolor);
-  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: var(--glassbg-color);
+  color: rgba(45, 80, 22, 0.7);
+  border: 1.5px solid rgba(45, 80, 22, 0.1);
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: 0.6s linear;
+}
+.backtoold:hover {
+  box-shadow: 0 8px 32px rgba(13, 47, 13, 0.3);
+  transform: translateY(-5px);
 }
 
-.submit:hover {
-  background: rgb(229, 255, 255);
+.quiz-buttons .nextstatement {
+  width: 90px;
+  font-size: 15px;
+  font-weight: bold;
+  align-items: center;
+  padding: 10px;
+  color: var(--btnfontcolor);
+  background: var(--btncolor);
+  border: var(--bordercolor);
+  border-radius: 20px;
+  transition: 0.6s linear;
 }
+
+.nextstatement:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(13, 47, 13, 0.3);
+}
+/* heading */
 .mcqs h4 {
   color: var(--color);
   font-size: x-large;
   background-clip: text;
 }
 .question {
-  background-color: white;
+  background: transparent;
   font-size: 17px;
-  padding: 20px 20px;
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
-  margin: 20px;
   border-radius: 10px;
-  border: 1px solid lightgrey;
+  margin: 0;
 }
-.question p {
+.question #quiz-questions {
   font-weight: bold;
-  font-size: 19px;
+  font-size: 25px;
+  height: 60px;
 }
 .question input {
   display: none;
 }
 .question label {
-  padding: 10px 0;
+  padding: 5px 0;
+  border: var(--color);
 }
 .question span {
   display: block;
   width: 100%;
-  background-color: whitesmoke;
+  background-color: var(--glassbg-color);
+  color: var(--color);
+  border: 1.5px solid rgba(45, 80, 22, 0.1);
   padding: 10px 15px;
   border-radius: 10px;
-  border: 1px solid black;
   font-weight: normal;
 }
 /* headder */
@@ -716,8 +789,11 @@ header {
   justify-content: space-between;
   width: 100%;
   height: 60px;
-  background: var(--headercolor);
+
   color: var(--color);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
 }
 .fa-angle-left {
   margin-right: 10px;
@@ -742,25 +818,34 @@ h4 input[type="checkbox"] {
   transform: scale(1.5); /* increase size */
   margin-left: 10px;
 }
-/* div dashboard complte */
+/* div dashboard page complete */
+.wlcomeuser {
+  margin: 20px;
+}
+
 .dashboardbody {
+  background: transparent;
   margin: 20px;
   display: flex;
   justify-content: space-between;
+  height: 80vh;
 }
 .rightsidegrid {
   width: 79%;
+  background: transparent;
 }
 
 /* profile  */
 .profile {
-  background: var(--dashboard-cards);
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
   color: var(--fontcolor);
-  box-shadow: 0 0 8px grey;
+
   padding: 20px;
   width: 19.5%;
   border-radius: 20px;
-  height: auto;
 }
 .profile p {
   padding: 7px;
@@ -815,7 +900,9 @@ h4 input[type="checkbox"] {
   width: 100%;
   column-gap: 20px;
   color: var(--color);
+  height: 300px;
 }
+/* score wali seperation  */
 .testingresult {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -824,10 +911,12 @@ h4 input[type="checkbox"] {
 /* bars */
 .testingresult .scorebars {
   border-radius: 20px;
-  height: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 8px grey;
-  padding: 20px;
+  /* height: 100%; */
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  padding: 0 20px;
   color: var(--fontcolor);
   font-size: large;
   display: flex;
@@ -926,8 +1015,11 @@ h4 input[type="checkbox"] {
   font-size: large;
   border-radius: 20px;
   height: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 8px grey;
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  color: var(--fontcolor);
   color: var(--fontcolor);
   padding: 20px 10px;
 }
@@ -935,7 +1027,7 @@ h4 input[type="checkbox"] {
   margin: 10px auto;
   width: 70%;
   height: 140px;
-  background: conic-gradient(rgb(53, 84, 151) 0.4%, rgb(227, 227, 239) 2%);
+  background: conic-gradient(rgb(53, 84, 151) 0.4%, rgb(255, 255, 255, 0.4) 2%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -946,7 +1038,7 @@ h4 input[type="checkbox"] {
 .inner {
   width: 80%;
   height: 110px;
-  background: var(--dashboard-cards);
+  background-color: var(--glassbg-color);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -964,9 +1056,11 @@ h4 input[type="checkbox"] {
   padding: 20px 10px;
   border-radius: 20px;
   width: 100%;
-  height: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 10px grey;
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  color: var(--fontcolor);
 }
 .progresscontainer {
   width: 100%;
@@ -1024,13 +1118,15 @@ h4 input[type="checkbox"] {
   margin-top: 20px;
   column-gap: 20px;
   width: 100%;
-  color: var(--color);
 }
 .tasks .lesson {
   border-radius: 20px;
   width: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 8px grey;
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  color: var(--fontcolor);
   padding: 20px;
   color: var(--fontcolor);
 }
@@ -1045,8 +1141,6 @@ h4 input[type="checkbox"] {
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
-  background: var(--btncolor);
-  border: 1px solid var(--fontcolor);
 }
 
 .lesson span {
@@ -1055,11 +1149,11 @@ h4 input[type="checkbox"] {
   color: rgb(40, 83, 53);
   border-radius: 20px;
 }
-.lesson button {
+.lesson .lsnbtn {
   background-color: #1f6f5f;
   border: var(--bordercolor);
 }
-.lesson button:hover {
+.lesson .lsnbtn:hover {
   background-color: rgb(170, 220, 170);
 }
 
@@ -1068,11 +1162,15 @@ h4 input[type="checkbox"] {
   padding: 5px;
   border-radius: 50%;
 }
+/* activitybox */
 .tasks .Activities {
   border-radius: 20px;
   width: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 8px grey;
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  color: var(--fontcolor);
   padding: 20px;
   color: var(--fontcolor);
 }
@@ -1082,11 +1180,11 @@ h4 input[type="checkbox"] {
   color: #111fa2;
   border-radius: 20px;
 }
-.Activities button {
+.Activities .Activitybtn {
   background-color: #26459f;
   border: 1px solid rgb(9, 25, 58);
 }
-.Activities button:hover {
+.Activities .Activitybtn:hover {
   background-color: rgb(218, 236, 251);
 }
 .Activities img {
@@ -1094,12 +1192,15 @@ h4 input[type="checkbox"] {
   padding: 5px;
   border-radius: 50%;
 }
-
+/* quizezbox */
 .tasks .quizez {
   border-radius: 20px;
   width: 100%;
-  background: var(--dashboard-cards);
-  box-shadow: 0 0 8px grey;
+  background: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border: var(--bordercolor);
+  box-shadow: var(--boxshadow);
+  color: var(--fontcolor);
   padding: 20px;
   color: var(--fontcolor);
 }
@@ -1110,7 +1211,7 @@ h4 input[type="checkbox"] {
   margin: 10px 0;
   border-radius: 20px;
 }
-.quizez button {
+.quizez .quizbtn {
   background-color: rgb(63, 213, 213);
   border: 1px solid rgb(11, 188, 207);
 }
@@ -1119,7 +1220,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(188, 234, 237);
   padding: 5px;
 }
-.quizez button:hover {
+.quizez .quizbtn:hover {
   background-color: rgb(190, 224, 226);
 }
 .tasks .btmspace {
@@ -1181,8 +1282,6 @@ h4 input[type="checkbox"] {
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
-  background: var(--btncolor);
-  border: 1px solid black;
   margin: 10px 0;
 }
 .lessoncontent {
@@ -1409,7 +1508,7 @@ h4 input[type="checkbox"] {
   .visionbox p {
     text-align: center;
   }
-  /* home */
+  /* service */
   .introduction {
     padding: 10px;
     font-size: small;
