@@ -18,7 +18,7 @@
   --btnfontcolor: white;
   --color: #2d5016;
   --bordercolor: 1px solid rgba(255, 255, 255, 0.18);
-  --boxshadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  --boxshadow: 0 8px 32px rgba(31, 38, 135, 0.1);
   /* Glass background circles */
   --circle1: rgba(25, 67, 66, 0.12);
   --circle2: rgba(208, 240, 192, 0.25);
@@ -102,7 +102,9 @@ nav ul li a.active::after {
 .leftwall {
   width: 2%;
   height: 89.9vh;
-  background-color: var(--headercolor);
+  background: var(--glassbg-color);
+  backdrop-filter: blur(16px);
+  border-left: var(--bordercolor);
 }
 .introbox {
   width: 40%;
@@ -154,7 +156,7 @@ a {
 }
 
 .loginbtn:hover {
-  transform: translatey();
+  transform: translatey(-5px);
 }
 
 .welcomebox img {
@@ -439,7 +441,7 @@ button:hover {
   background-color: var(--glassbg-color);
   backdrop-filter: var(--backdropfilter);
   box-shadow: var(--boxshadow);
-  border: var (--bordercolor);
+  border: var(--bordercolor);
   border-radius: 20px;
 }
 
@@ -789,7 +791,6 @@ header {
   justify-content: space-between;
   width: 100%;
   height: 60px;
-
   color: var(--color);
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(16px);
@@ -824,15 +825,15 @@ h4 input[type="checkbox"] {
 }
 
 .dashboardbody {
-  background: transparent;
   margin: 20px;
   display: flex;
+  gap: 20px;
   justify-content: space-between;
-  height: 80vh;
+  min-height: 90vh;
 }
 .rightsidegrid {
-  width: 79%;
   background: transparent;
+  flex: 4;
 }
 
 /* profile  */
@@ -842,9 +843,9 @@ h4 input[type="checkbox"] {
   border: var(--bordercolor);
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
-
   padding: 20px;
-  width: 19.5%;
+  flex: 1;
+  max-width: 230px;
   border-radius: 20px;
 }
 .profile p {
@@ -899,24 +900,24 @@ h4 input[type="checkbox"] {
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
   column-gap: 20px;
-  color: var(--color);
-  height: 300px;
+  background: transparent;
 }
 /* score wali seperation  */
 .testingresult {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 10px;
+  background: transparent;
 }
 /* bars */
 .testingresult .scorebars {
   border-radius: 20px;
-  /* height: 100%; */
+  height: 100%;
   background: var(--glassbg-color);
   backdrop-filter: var(--backdropfilter);
   border: var(--bordercolor);
   box-shadow: var(--boxshadow);
-  padding: 0 20px;
+  padding: 20px;
   color: var(--fontcolor);
   font-size: large;
   display: flex;
@@ -933,6 +934,7 @@ h4 input[type="checkbox"] {
   font-size: small;
   font-weight: bold;
   padding: 8px 0 0 0;
+  margin: 0;
 }
 
 .socialskills {
@@ -1020,14 +1022,13 @@ h4 input[type="checkbox"] {
   border: var(--bordercolor);
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
-  color: var(--fontcolor);
   padding: 20px 10px;
 }
 .circle {
   margin: 10px auto;
   width: 70%;
   height: 140px;
-  background: conic-gradient(rgb(53, 84, 151) 0.4%, rgb(255, 255, 255, 0.4) 2%);
+  background: conic-gradient(rgb(53, 84, 151) 0.4%, var(--backgroundcolor) 2%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1038,7 +1039,7 @@ h4 input[type="checkbox"] {
 .inner {
   width: 80%;
   height: 110px;
-  background-color: var(--glassbg-color);
+  background-color: white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1049,6 +1050,7 @@ h4 input[type="checkbox"] {
 .scores p {
   text-align: center;
   font-size: 17px;
+  margin: 0;
 }
 /* progrees cards */
 .gridbox .Progressmade {
@@ -1092,24 +1094,28 @@ h4 input[type="checkbox"] {
   border-radius: 20px;
   color: #085041;
   background-color: #e1f5ee;
+  margin: 0;
 }
 .discussion-remark {
   padding: 10px;
   border-radius: 20px;
   background-color: #eeedfe;
   color: #3c3489;
+  margin: 0;
 }
 .awareness-remark {
   padding: 10px;
   border-radius: 20px;
   background-color: #faece7;
   color: #712b13;
+  margin: 0;
 }
 .esteem-remark {
   padding: 10px;
   border-radius: 20px;
   background-color: rgb(243, 194, 243);
   color: puple;
+  margin: 0;
 }
 /* 3 ai lesson button */
 .tasks {
@@ -1128,7 +1134,6 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
-  color: var(--fontcolor);
 }
 
 .tasks p {
@@ -1172,7 +1177,6 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
-  color: var(--fontcolor);
 }
 .Activities span {
   background-color: #b7c7f7;
@@ -1202,7 +1206,6 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
-  color: var(--fontcolor);
 }
 .quizez span {
   background-color: rgb(188, 234, 237);
