@@ -31,6 +31,7 @@
     transparent 70%
   );
   --backdropfilter: blur(20px);
+  --dashboard-color: black;
 }
 
 body {
@@ -899,6 +900,7 @@ h4 input[type="checkbox"] {
   border-radius: 20px;
 }
 .profile p {
+  color: var(--dashboard-color);
   padding: 7px;
   display: flex;
 }
@@ -923,8 +925,8 @@ h4 input[type="checkbox"] {
   display: block; /* Inline-block ki jagah block */
   width: fit-content; /* Ya koi fixed width jaise 150px */
   margin: 10px auto;
-  background: var(--headercolor);
-  color: var(--color);
+  background: var(--backgroundsgradientcolor);
+  color: var(--btnfontcolor);
   padding: 10px;
   font-size: 14px;
   font-weight: bold;
@@ -933,9 +935,9 @@ h4 input[type="checkbox"] {
 }
 
 .profile .logout {
+  color: var(--btnfontcolor);
   bottom: 20px;
-  background: var(--headercolor);
-  color: var(--color);
+  background: var(--backgroundsgradientcolor);
   padding: 10px 0;
   margin-top: 68%;
   width: 100%;
@@ -980,6 +982,7 @@ h4 input[type="checkbox"] {
   padding-bottom: 5px;
 }
 .scorebars p {
+  color: var(--dashboard-color);
   text-align: left;
   font-size: small;
   font-weight: bold;
@@ -993,6 +996,7 @@ h4 input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 20px;
+  color: var(--dashboard-color);
 }
 
 .skillbar {
@@ -1012,6 +1016,7 @@ h4 input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 20px;
+  color: var(--dashboard-color);
 }
 
 .regulationbar {
@@ -1031,6 +1036,7 @@ h4 input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 20px;
+  color: var(--dashboard-color);
 }
 .awarebar {
   height: 5px;
@@ -1049,6 +1055,7 @@ h4 input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 20px;
+  color: var(--dashboard-color);
 }
 
 .emphatybar {
@@ -1078,12 +1085,11 @@ h4 input[type="checkbox"] {
   margin: 10px auto;
   width: 70%;
   height: 140px;
-  background: conic-gradient(rgb(53, 84, 151) 0.4%, var(--backgroundcolor) 2%);
+  background: conic-gradient(rgb(28, 81, 28) 0%, rgb(232, 230, 230) 2%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #767376;
 }
 
 .inner {
@@ -1095,9 +1101,9 @@ h4 input[type="checkbox"] {
   justify-content: center;
   align-items: center;
   font-size: xx-large;
-  border: 1px solid #767376;
 }
 .scores p {
+  color: var(--dashboard-color);
   text-align: center;
   font-size: 17px;
   margin: 0;
@@ -1126,11 +1132,12 @@ h4 input[type="checkbox"] {
 .progresscontainer .card {
   width: 100%;
   height: 100%;
-  background: rgb(247, 247, 255);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 3px 3px 5px rgb(122, 119, 119);
   border-radius: 20px;
   border: 1px solid lavender;
-  color: black;
+  color: var(--dashboard-color);
   padding: 10px;
 }
 
@@ -1187,15 +1194,22 @@ h4 input[type="checkbox"] {
 }
 
 .tasks p {
+  color: var(--dashboard-color);
   padding: 10px 0;
   margin-bottom: 10px;
 }
 .tasks button {
+  color: var(--btnfontcolor);
   margin-top: 20px;
   width: 100%;
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
+}
+/* lesson */
+.lesson p {
+  color: var(--dashboard-color);
+  padding-top: 0;
 }
 
 .lesson span {
@@ -1230,10 +1244,14 @@ h4 input[type="checkbox"] {
   color: var(--fontcolor);
   padding: 20px;
 }
+.Activities p {
+  padding-top: 0;
+  color: var(--dashboard-color);
+}
 .Activities span {
   padding: 10px;
   background: rgba(45, 80, 22, 0.08);
-  color: #5c8a3c;
+  color: var(--dashboard-color);
   border-radius: 40px;
 }
 .Activities .Activitybtn {
@@ -1260,11 +1278,13 @@ h4 input[type="checkbox"] {
   color: var(--fontcolor);
   padding: 20px;
 }
+.quizez p {
+  padding-top: 0;
+}
 .quizez span {
   background: rgba(45, 80, 22, 0.08);
-  color: #5c8a3c;
+  color: var(--dashboard-color);
   padding: 10px;
-
   margin: 10px 0;
   border-radius: 20px;
 }
@@ -1285,6 +1305,12 @@ h4 input[type="checkbox"] {
   padding: 0;
   display: none;
 }
+/* task heading */
+.tasks h4 {
+  text-align: left;
+  font-family: "Times New Roman", Times, serif;
+  padding: 0;
+}
 /* ai generated content */
 .QuizContent {
   width: 75%;
@@ -1299,7 +1325,7 @@ h4 input[type="checkbox"] {
   scrollbar-gutter: stable;
   border-radius: 20px;
   scrollbar-width: none;
-  background-color: var(--headercolor);
+  background-color: var(--lightwhitebgcolor);
   border: var(--bordercolor);
 }
 .QuizContent h2 {
@@ -1328,7 +1354,7 @@ h4 input[type="checkbox"] {
   scrollbar-gutter: stable;
   border-radius: 20px;
   scrollbar-width: none;
-  background-color: var(--headercolor);
+  background-color: var(--lightwhitebgcolor);
   border: var(--bordercolor);
 }
 .ActivityContent h2 {
@@ -1336,6 +1362,8 @@ h4 input[type="checkbox"] {
   padding: 0 0 10px 0;
 }
 .ActivityContent button {
+  background: var(--backgroundsgradientcolor);
+  border: none;
   width: 100%;
   font-weight: bold;
   padding: 10px;
@@ -1355,8 +1383,8 @@ h4 input[type="checkbox"] {
   scrollbar-gutter: stable;
   border-radius: 20px;
   scrollbar-width: none;
-  background-color: var(--headercolor);
-  border: 3px solid rgb(4, 54, 4);
+  background-color: var(--lightwhitebgcolor);
+  /* border: 3px solid rgb(4, 54, 4); */
 }
 .lessoncontent h4 {
   text-align: left;
@@ -1638,6 +1666,7 @@ h4 input[type="checkbox"] {
   }
   /* dashboard */
   .dashboardbody {
+    color: #5c8a3c;
     margin: 20px 30px;
     display: flex;
     flex-direction: column;
