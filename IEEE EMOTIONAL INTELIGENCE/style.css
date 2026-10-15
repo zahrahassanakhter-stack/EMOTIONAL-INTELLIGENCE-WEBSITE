@@ -177,7 +177,7 @@ a {
   right: 70px;
 }
 
-/* sign up page */
+/* register  page */
 .registerpage {
   display: flex;
   width: 70%;
@@ -211,7 +211,7 @@ a {
   color: rgba(255, 255, 255, 0.75);
   padding-left: 15px;
 }
-/* right isde block */
+/* right side block */
 .Registerblock {
   background: var(--lightwhitebgcolor);
   width: 50%;
@@ -266,7 +266,7 @@ input {
   width: 70%;
   height: auto;
   border-radius: 20px;
-  border: var(--bordercolor);
+
   color: white;
   position: absolute;
   top: 50%;
@@ -345,6 +345,7 @@ input {
   font-weight: bold;
   padding: 0 0 15px 0;
 }
+
 .logininfo .forgetpsw:hover {
   color: rgb(135, 192, 192);
 }
@@ -356,6 +357,7 @@ input {
 .logininfo p a {
   text-decoration: underline;
   color: #5c8a3c;
+  font-weight: bold;
 }
 .logininfo p a:hover {
   color: rgb(135, 192, 192);
@@ -363,6 +365,7 @@ input {
 
 .logininfo button,
 .Registerblock button {
+  color: var(--btnfontcolor);
   width: 100%;
   font-weight: bold;
   padding: 10px;
@@ -389,7 +392,7 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   height: auto;
-  background-color: var(--headercolor);
+  background: var(--lightwhitebgcolor);
   border-radius: 20px;
   color: var(--color);
   border: var(--bordercolor);
@@ -403,17 +406,25 @@ button:hover {
 }
 .forgetpassword .mainheadings,
 .links {
+  display: block;
   text-align: center;
   margin: 0 auto;
   color: var(--color);
   text-decoration: none;
 }
+.links {
+  width: 200px;
+}
 .forgetpassword .labels {
   margin-top: 10px;
+  display: block;
 }
 
 .links:hover {
   color: rgb(135, 192, 192);
+}
+.forgetpassword input {
+  width: 100%;
 }
 .forgetpassword .allbuttons {
   width: 100%;
@@ -421,12 +432,13 @@ button:hover {
   padding: 10px;
   margin: 10px 0;
   border-radius: 10px;
+  color: var(--btnfontcolor);
   background: var(--btncolor);
   border: var(--bordercolor);
 }
 .allbuttons:hover {
   background-color: rgb(135, 192, 192);
-  color: rgb(3, 79, 51);
+  color: rgb(110, 220, 180);
 }
 #label_two {
   margin-top: 0;
@@ -497,7 +509,7 @@ button:hover {
   display: flex;
   padding: 40px;
   border-radius: 20px;
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: var(--glassbg-color);
 }
 .whoweare .picbox img {
   height: 100%;
@@ -710,7 +722,7 @@ p {
   box-shadow: var(--boxshadow);
   border: var(--bordercolor);
 }
-/* bar */
+/* top header bar */
 .questioncount {
   width: 25%;
   border-radius: 10%;
@@ -743,7 +755,6 @@ p {
   padding: 10px;
   font-size: larger;
   color: white;
-
   background-color: var(--color);
   border-radius: 50%;
   transition: 0.4 linear 1s;
@@ -1251,7 +1262,7 @@ h4 input[type="checkbox"] {
 .Activities span {
   padding: 10px;
   background: rgba(45, 80, 22, 0.08);
-  color: var(--dashboard-color);
+  color: #5c8a3c;
   border-radius: 40px;
 }
 .Activities .Activitybtn {
@@ -1283,7 +1294,7 @@ h4 input[type="checkbox"] {
 }
 .quizez span {
   background: rgba(45, 80, 22, 0.08);
-  color: var(--dashboard-color);
+  color: #5c8a3c;
   padding: 10px;
   margin: 10px 0;
   border-radius: 20px;
@@ -1500,12 +1511,8 @@ h4 input[type="checkbox"] {
     align-items: center;
     border-radius: 10%;
   }
-  .registerimage {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    border-radius: 10%;
+  .register_content {
+    display: none;
   }
 
   .Registerblock {
