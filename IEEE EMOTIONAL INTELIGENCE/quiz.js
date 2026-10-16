@@ -81,12 +81,11 @@ function progressbarincrease() {
   bar_level[0].style.width = percentage + "%";
 }
 
-//submit button
-// let submit = document.getElementsByClassName("submit")[0];
-// submit.addEventListener("click", () => {
-//   window.location.href = "dashboard.html";
-// });
-// codee
+// submit button
+let submit = document.getElementsByClassName("submit")[0];
+submit.addEventListener("click", () => {
+  window.location.href = "dashboard.html";
+});
 
 // 👇 yahan se tumhara purana quiz code start hoga
 document.addEventListener("DOMContentLoaded", function () {

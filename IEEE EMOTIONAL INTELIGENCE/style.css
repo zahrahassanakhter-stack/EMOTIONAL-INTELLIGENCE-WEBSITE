@@ -459,6 +459,9 @@ button:hover {
   width: 100%;
   height: 200px;
   margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bannerbox {
@@ -476,17 +479,17 @@ button:hover {
   text-align: center;
   color: var(--color);
 }
+#centeraboutbtn {
+  border-radius: 10px;
+}
 .bannerbox .banerbtn {
-  width: 20%;
+  width: 30%;
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
   color: var(--btnfontcolor);
   background: var(--btncolor);
   border: var(--bordercolor);
-  margin: auto;
-  position: absolute;
-  left: 40%;
   transition: 0.5s linear;
   cursor: pointer;
 }
@@ -497,11 +500,6 @@ button:hover {
 .whoweare {
   margin: 30px auto;
   width: 90%;
-  background-color: var(--glassbg-color);
-  backdrop-filter: var(--backdropfilter);
-  box-shadow: var(--boxshadow);
-  border: var(--bordercolor);
-  border-radius: 20px;
 }
 
 .whoweare .whoweareboxex {
@@ -818,11 +816,14 @@ p {
   border-radius: 10px;
   margin: 0;
 }
-.question #quiz-questions {
+
+/* .question #quiz-questions {
   font-weight: bold;
   font-size: 25px;
-  height: 60px;
-}
+  line-height: 1.4;
+  height: auto;
+} */
+
 .question input {
   display: none;
 }
@@ -1550,6 +1551,20 @@ h4 input[type="checkbox"] {
     height: 84px;
     border-radius: 10%;
   }
+  /* forget password */
+  .forgetpassword {
+    cursor: pointer;
+    width: 70%;
+    height: auto;
+    margin: 130px auto;
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   /* aboutus */
 
   .bannerbox {
@@ -1640,16 +1655,20 @@ h4 input[type="checkbox"] {
   body {
     height: 100vh;
   }
+
   .backbtn {
-    padding: 10px 10px;
+    font-size: 5px;
+    margin: 7px;
   }
-  .backbtn img {
-    height: 30px;
-    width: 30px;
+  .backbtn #left {
     padding: 5px;
+    margin: 0;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
   }
+
   .mcqs {
-    border: 2px solid rgb(4, 54, 4);
     width: 85%;
     margin: auto;
     height: 79%;
@@ -1660,19 +1679,21 @@ h4 input[type="checkbox"] {
     transform: translate(-50%, -50%);
   }
   .mcqs h4 {
-    font-size: larger;
+    font-size: large;
     width: 100%;
     padding-bottom: 0;
   }
+
   .questioncount {
     width: 30%;
   }
-  .question {
-    font-size: 15px;
+
+  #quiz-questions {
+    font-size: 18px !important;
+    line-height: 1.4;
+    height: auto;
   }
-  .question p {
-    font-size: 17px;
-  }
+
   .mcqs .submit {
     width: 90%; /* or any fixed/auto width */
     display: block;
