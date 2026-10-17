@@ -16,7 +16,6 @@ Emotional Intelligence Lab is a web-based project designed to help users underst
 - HTML
 - CSS
 - JavaScript
-- LocalStorage
 
 ## Project Status
 The frontend has been developed. Backend integration, database connectivity, secure authentication, and email-based OTP verification are planned for future development.
@@ -24,5 +23,5 @@ The frontend has been developed. Backend integration, database connectivity, sec
 ## Purpose
 The purpose of this project is to provide an interactive platform for exploring emotional awareness, self-management, and empathy.
 
-## Author
-Zahra Hassan
+
+
