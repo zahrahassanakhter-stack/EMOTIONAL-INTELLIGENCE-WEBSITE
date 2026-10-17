@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register page</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/254f436bca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- register div  -->
+    <div class="registerpage">
+      <!-- image section -->
+      <div class="register_content">
+        <div class="neasted-register-box">
+          <h1>Start your <br />emotional intelligence <br />journey</h1>
+          <p>
+            Create your free account and take <br />
+            your first EQ assessment today.
+          </p>
+          <div class="register-list">
+            <ul>
+              <li>Free forever — no credit card</li>
+              <li>Instant EQ results</li>
+              <li>AI personalized lessons</li>
+              <li>Track growth over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- text section -->
+      <div class="Registerblock">
+        <h4>Register</h4>
+        <label for="user_name">Username:</label>
+        <input
+          type="text"
+          id="user_name"
+          name="Username"
+          placeholder="Enter Username "
+        />
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          type="email"
+          name="Email"
+          placeholder="Enter Email "
+        />
+        <label for="Password">Password:</label>
+        <div class="eyeoption">
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter Password "
+            autocomplete="new-password"
+          />
+          <i class="fa-solid fa-eye-low-vision" onclick="seepassword(1)"></i>
+          <i class="fa-solid fa-eye" onclick="hidepasswrd(1)"></i>
+        </div>
+        <label for="confirm-password">Confirm password:</label>
+        <div class="eyeoption">
+          <input
+            id="confirm-password"
+            type="password"
+            name="confirmpassword"
+            placeholder="Enter Password again "
+          />
+          <i class="fa-solid fa-eye-low-vision" onclick="seepassword(2)"></i>
+          <i class="fa-solid fa-eye" onclick="hidepasswrd(2)"></i>
+        </div>
+
+        <button onclick="gotologin()" id="submit" type="submit">
+          Register
+        </button>
+        <p
+          style="text-align: left; color: rgb(228, 173, 173)"
+          id="newstatement"
+        ></p>
+        <p class="login_msg">
+          Already have an account?
+          <a id="linked" href="login.html">Login</a>
+        </p>
+      </div>
+    </div>
+    <!-- script -->
+    <script>
+      let arr = document.getElementsByTagName("input");
+
+      function gotologin() {
+        document.getElementById("newstatement").textContent = "";
+        let isError = false;
+        for (let i = 0; i < arr.length; i++) {
+          document.getElementById("newstatement").style.display = "block";
+          if (arr[i].value == "") {
+            document.getElementById("newstatement").textContent =
+              arr[i].name + " is required!";
+
+            isError = true;
+            break;
+          } else if (
+            arr[i].name == "Email" &&
+            !arr[i].value.includes("@gmail.com")
+          ) {
+            document.getElementById("newstatement").textContent =
+              "Please provide a valid @gmail.com address";
+            isError = true;
+            break;
+          } else if (arr[i].name == "Password" && arr[i].value.length <= 8) {
+            document.getElementById("newstatement").textContent =
+              "Your password must have at least 8 characters";
+            isError = true;
+            break;
+          } else if (
+            arr[i].name == "confirmpassword" &&
+            arr[i].value != document.getElementById("confirm-password").value
+          ) {
+            document.getElementById("newstatement").textContent =
+              "Passwords do not match. Please re-type. ";
+            isError = true;
+            break;
+          }
+        }
+        if (isError == false) {
+          let email = document.getElementById("email");
+          let password = document.getElementById("password");
+          let username = document.getElementById("user_name");
+          localStorage.setItem("email", email.value);
+          localStorage.setItem("password", password.value);
+          localStorage.setItem("username", username.value);
+
+          window.location.href = "login.html";
+        }
+      }
+      // pssword see
+      let password = document.getElementById("password");
+      let confirmpsw = document.getElementById("confirm-password");
+      function seepassword(fieldnum) {
+        if (password.type == "password" && fieldnum == 1) {
+          password.type = "text";
+          document.getElementsByClassName("fa-eye")[0].style.display = "block";
+          document.getElementsByClassName(
+            "fa-eye-low-vision",
+          )[0].style.display = "none";
+        } else {
+          confirmpsw.type = "text";
+          document.getElementsByClassName("fa-eye")[1].style.display = "block";
+          document.getElementsByClassName(
+            "fa-eye-low-vision",
+          )[1].style.display = "none";
+        }
+      }
+      function hidepasswrd(fieldnum) {
+        if (fieldnum == 1) {
+          password.type = "password";
+          document.getElementsByClassName("fa-eye")[0].style.display = "none";
+          document.getElementsByClassName(
+            "fa-eye-low-vision",
+          )[0].style.display = "block";
+        } else {
+          confirmpsw.type = "password";
+          document.getElementsByClassName("fa-eye")[1].style.display = "none";
+          document.getElementsByClassName(
+            "fa-eye-low-vision",
+          )[1].style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
