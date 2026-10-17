@@ -546,6 +546,9 @@ button:hover {
   padding: 40px;
   border-radius: 20px;
   background-color: var(--glassbg-color);
+  backdrop-filter: var(--backdropfilter);
+  border-radius: 20px;
+  border: var(--bordercolor);
 }
 .whoweare .picbox img {
   height: 100%;
@@ -1463,6 +1466,7 @@ h4 input[type="checkbox"] {
   }
 
   #menuitem {
+    cursor: pointer;
     display: block;
     color: var(--color);
     margin-right: 10px;
@@ -1472,15 +1476,17 @@ h4 input[type="checkbox"] {
   }
 
   nav img {
+    cursor: pointer;
     display: block;
     margin: 10px auto;
   }
   nav {
+    cursor: pointer;
     position: absolute;
     height: 100vh;
     width: 170px;
     text-align: right;
-    background-color: #13473e;
+    background: var(--btncolor);
     z-index: 2;
     top: 0;
     right: -170px;
@@ -1493,13 +1499,12 @@ h4 input[type="checkbox"] {
   }
 
   nav ul li a {
+    color: var(--btnfontcolor);
     display: block;
     transition: none;
     width: 100%;
   }
-  nav ul li a:hover {
-    background: var(--btncolor);
-  }
+
   /* welcome page */
 
   .allcontent .leftwall {
@@ -1608,32 +1613,35 @@ h4 input[type="checkbox"] {
     align-items: center;
   }
   /* aboutus */
-
+  .banner {
+    margin: 40px auto 0 auto;
+  }
   .bannerbox {
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .bannerbox p {
     font-size: 14px;
   }
   .bannerbox h1 {
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
   }
 
-  .bannerbox a button {
+  .bannerbox #centeraboutbtn button {
     width: 100%;
-    left: 20%;
     font-size: 12px;
   }
   .whoweare {
-    margin: 10px;
-    padding: 10px 0;
+    margin: 20 auto;
   }
 
   .whoweare .whoweareboxex {
     display: flex;
     flex-direction: column;
-    padding: 0;
+    padding: 20px 0;
   }
   .whoweare .picbox {
     width: 100%;
@@ -1661,7 +1669,7 @@ h4 input[type="checkbox"] {
   .visionbox p {
     text-align: center;
   }
-  /* service */
+  /* service page */
   .testinstruction {
     width: 90%;
     margin: 50px auto 20px;
