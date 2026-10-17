@@ -48,6 +48,45 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+/* background color */
+.bg {
+  /* position: fixed;
+  inset: 0;
+  z-index: 0; */
+  background: linear-gradient(
+    135deg,
+    #e8f5ee 0%,
+    #f5faf7 40%,
+    #eaf4f0 70%,
+    #d6ede2 100%
+  );
+}
+.bg-circle1 {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 250, 241, 0.15) 0%,
+    transparent 70%
+  );
+}
+.bg-circle2 {
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(45, 80, 22, 0.1) 0%,
+    transparent 70%
+  );
+}
 
 /* welcome page */
 #menuitem {
@@ -910,7 +949,7 @@ h4 input[type="checkbox"] {
   color: var(--fontcolor);
   padding: 20px;
   flex: 1;
-  max-width: 230px;
+  max-width: 20%;
   border-radius: 20px;
 }
 .profile p {
@@ -933,7 +972,7 @@ h4 input[type="checkbox"] {
   border-radius: 50%;
 }
 .profile .u_name {
-  text-align: center;
+  text-align: left;
 }
 #dashboardpic {
   display: block; /* Inline-block ki jagah block */
@@ -1735,18 +1774,58 @@ h4 input[type="checkbox"] {
     background-color: var(--btncolor);
   }
   /* dashboard */
+
   .dashboardbody {
-    color: #5c8a3c;
+    color: #b0c8b0;
     margin: 20px 30px;
     display: flex;
     flex-direction: column;
   }
-  .rightsidegrid {
-    width: 100%;
+  .wlcomeuser h1 {
+    font-size: 1.7rem;
   }
   .profile {
-    width: 100%;
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+  #username {
+    text-align: center;
+  }
+  .profile p {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  /*  */
+  .profile-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .info-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #b0c8b0;
+    font-weight: 600;
+  }
+  #eqlevel {
+    font-size: 0.82rem;
+    color: #3d5a3d;
+    font-weight: 500;
+  }
+  .info-value {
+    font-size: 0.82rem;
+    color: #3d5a3d;
+    font-weight: 500;
+    text-align: left;
   }
   .profile .logout {
     margin-top: 10px;
@@ -1754,6 +1833,10 @@ h4 input[type="checkbox"] {
   .profile .pic {
     height: 70px;
     width: 80px;
+  }
+  /* left side ki porfuile */
+  .rightsidegrid {
+    width: 100%;
   }
   .gridbox {
     width: 100%;
@@ -1763,6 +1846,10 @@ h4 input[type="checkbox"] {
   }
   .testingresult {
     margin-top: 20px;
+  }
+  .circle {
+    max-width: 90%;
+    min-width: 50%;
   }
   .Progressmade {
     margin-top: 20px;
