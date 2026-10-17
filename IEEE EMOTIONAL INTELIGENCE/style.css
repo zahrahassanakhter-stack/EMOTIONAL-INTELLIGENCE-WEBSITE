@@ -585,20 +585,23 @@ p {
   color: var(--color);
 }
 
-/* home page */
+/* service page */
 .testinstruction {
   margin: 60px auto;
   width: 50%;
 }
 .testinstruction .testheading {
   text-align: center;
-  font-size: 40px;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.1;
   width: 90%;
   margin: auto;
 }
 .testinstruction .teststatement {
   color: var(--color);
   text-align: center;
+  font-size: 0.95rem;
 }
 .introduction {
   padding: 0 30px;
@@ -675,7 +678,7 @@ p {
   backdrop-filter: var(--backdropfilter);
   border-radius: 20px;
   box-shadow: var(--boxshadow);
-  padding: 30px;
+  padding: 50px 30px;
   color: var(--btnfontcolor);
   text-align: center;
   font-size: 15px;
@@ -1620,26 +1623,32 @@ h4 input[type="checkbox"] {
     text-align: center;
   }
   /* service */
+  .testinstruction {
+    width: 90%;
+    margin: 50px auto 20px;
+  }
+  .testinstruction .testheading {
+    font-size: 30px;
+  }
+  .testinstruction .teststatement {
+    font-size: 14px;
+  }
   .introduction {
+    margin: 0 auto;
+    width: 90%;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 10px;
     font-size: small;
   }
+  .testcontainer {
+    width: 100%;
+  }
   .testintro {
-    width: 100%;
-    left: 25%;
-    display: none;
-  }
-
-  .testintro p {
-    font-size: 15px;
-  }
-  .starttest {
-    width: 100%;
-    margin-right: 0;
-    padding: 40px 20px;
+    width: 80%;
+    height: auto;
   }
   .stepone p,
   .steptwo p,
@@ -1647,7 +1656,24 @@ h4 input[type="checkbox"] {
     font-size: 15px;
   }
   .number img {
-    margin: 0;
+    margin: 20;
+  }
+
+  /* 2nd batc  */
+  .testcard {
+    margin: 30px 0;
+    width: 100%;
+    height: auto;
+  }
+  .test {
+    padding: 30px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .starttest {
+    width: 80%;
   }
 
   /* quiz page */
@@ -1685,9 +1711,16 @@ h4 input[type="checkbox"] {
   }
 
   .questioncount {
-    width: 30%;
+    width: 40%;
+  }
+  .questioncount h3,
+  p {
+    font-size: 1rem;
   }
 
+  .questionbar {
+    width: 60%;
+  }
   #quiz-questions {
     font-size: 18px !important;
     line-height: 1.4;
