@@ -48,45 +48,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-/* background color */
-.bg {
-  /* position: fixed;
-  inset: 0;
-  z-index: 0; */
-  background: linear-gradient(
-    135deg,
-    #e8f5ee 0%,
-    #f5faf7 40%,
-    #eaf4f0 70%,
-    #d6ede2 100%
-  );
-}
-.bg-circle1 {
-  position: absolute;
-  top: -120px;
-  right: -80px;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(245, 250, 241, 0.15) 0%,
-    transparent 70%
-  );
-}
-.bg-circle2 {
-  position: absolute;
-  bottom: -80px;
-  left: -80px;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(45, 80, 22, 0.1) 0%,
-    transparent 70%
-  );
-}
 
 /* welcome page */
 #menuitem {
@@ -977,6 +938,38 @@ h4 input[type="checkbox"] {
 .profile .u_name {
   text-align: left;
 }
+/*  */
+/*  */
+.profile-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.info-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b0c8b0;
+  font-weight: 600;
+}
+#eqlevel {
+  font-size: 0.82rem;
+  color: #3d5a3d;
+  font-weight: 500;
+}
+.info-value {
+  font-size: 0.82rem;
+  color: #3d5a3d;
+  font-weight: 500;
+  text-align: left;
+}
+/*  */
 #dashboardpic {
   display: block; /* Inline-block ki jagah block */
   width: fit-content; /* Ya koi fixed width jaise 150px */
@@ -992,15 +985,15 @@ h4 input[type="checkbox"] {
 
 .profile .logout {
   color: var(--btnfontcolor);
-  bottom: 20px;
+  margin: 10px;
   background: var(--backgroundsgradientcolor);
   padding: 10px 0;
-  margin-top: 68%;
   width: 100%;
   font-weight: bold;
   border: none;
   border-radius: 10px;
 }
+
 /* grid for storing progess score  */
 .gridbox {
   display: grid;
@@ -1238,6 +1231,16 @@ h4 input[type="checkbox"] {
   column-gap: 20px;
   width: 100%;
 }
+
+.tasks button {
+  color: var(--btnfontcolor);
+  width: 100%;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+}
+/* lesson */
+
 .tasks .lesson {
   border-radius: 20px;
   width: 100%;
@@ -1247,30 +1250,27 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.tasks p {
-  color: var(--dashboard-color);
-  padding: 10px 0;
-  margin-bottom: 10px;
+.lesson img {
+  width: 45px;
+
+  background-color: rgb(219, 251, 213);
+  padding: 5px;
+  border-radius: 50%;
 }
-.tasks button {
-  color: var(--btnfontcolor);
-  margin-top: 20px;
-  width: 100%;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 10px;
-}
-/* lesson */
+
 .lesson p {
   color: var(--dashboard-color);
-  padding-top: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .lesson span {
   background-color: rgb(219, 251, 213);
-  padding: 10px;
   background: rgba(45, 80, 22, 0.08);
   color: #5c8a3c;
   border-radius: 20px;
@@ -1284,11 +1284,6 @@ h4 input[type="checkbox"] {
   background-color: rgb(170, 220, 170);
 }
 
-.lesson img {
-  background-color: rgb(219, 251, 213);
-  padding: 5px;
-  border-radius: 50%;
-}
 /* activitybox */
 .tasks .Activities {
   border-radius: 20px;
@@ -1299,10 +1294,15 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 .Activities p {
-  padding-top: 0;
   color: var(--dashboard-color);
+  padding: 0;
+  margin: 0;
 }
 .Activities span {
   padding: 10px;
@@ -1319,6 +1319,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(218, 236, 251);
 }
 .Activities img {
+  width: 45px;
   background-color: #b7c7f7;
   padding: 5px;
   border-radius: 50%;
@@ -1333,9 +1334,13 @@ h4 input[type="checkbox"] {
   box-shadow: var(--boxshadow);
   color: var(--fontcolor);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .quizez p {
-  padding-top: 0;
+  padding: 0;
+  margin: 0;
 }
 .quizez span {
   background: rgba(45, 80, 22, 0.08);
@@ -1350,6 +1355,7 @@ h4 input[type="checkbox"] {
   cursor: pointer;
 }
 .quizez img {
+  width: 45px;
   border-radius: 50%;
   background-color: rgb(188, 234, 237);
   padding: 5px;
