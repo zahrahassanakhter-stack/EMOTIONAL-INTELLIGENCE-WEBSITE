@@ -36,20 +36,26 @@
         </div>
       </div>
       <!-- text section -->
-      <div class="Registerblock">
+
+      <form
+        action="register.php"
+        method="POST"
+        class="Registerblock"
+        onsubmit="return validateRegister();"
+      >
         <h4>Register</h4>
         <label for="user_name">Username:</label>
         <input
           type="text"
           id="user_name"
-          name="Username"
+          name="full_name"
           placeholder="Enter Username "
         />
         <label for="email">Email:</label>
         <input
           id="email"
           type="email"
-          name="Email"
+          name="email"
           placeholder="Enter Email "
         />
         <label for="Password">Password:</label>
@@ -69,16 +75,14 @@
           <input
             id="confirm-password"
             type="password"
-            name="confirmpassword"
+            name="confirm_password"
             placeholder="Enter Password again "
           />
           <i class="fa-solid fa-eye-low-vision" onclick="seepassword(2)"></i>
           <i class="fa-solid fa-eye" onclick="hidepasswrd(2)"></i>
         </div>
 
-        <button onclick="gotologin()" id="submit" type="submit">
-          Register
-        </button>
+        <button id="submit" type="submit">Register</button>
         <p
           style="text-align: left; color: rgb(228, 173, 173)"
           id="newstatement"
@@ -87,17 +91,17 @@
           Already have an account?
           <a id="linked" href="login.html">Login</a>
         </p>
-      </div>
+      </form>
     </div>
     <!-- script -->
     <script>
       let arr = document.getElementsByTagName("input");
 
-      function gotologin() {
+      function validateRegister() {
         document.getElementById("newstatement").textContent = "";
+        document.getElementById("newstatement").style.display = "none";
         let isError = false;
         for (let i = 0; i < arr.length; i++) {
-          document.getElementById("newstatement").style.display = "block";
           if (arr[i].value == "") {
             document.getElementById("newstatement").textContent =
               arr[i].name + " is required!";
@@ -105,20 +109,20 @@
             isError = true;
             break;
           } else if (
-            arr[i].name == "Email" &&
+            arr[i].name == "email" &&
             !arr[i].value.includes("@gmail.com")
           ) {
             document.getElementById("newstatement").textContent =
               "Please provide a valid @gmail.com address";
             isError = true;
             break;
-          } else if (arr[i].name == "Password" && arr[i].value.length <= 8) {
+          } else if (arr[i].name == "password" && arr[i].value.length < 8) {
             document.getElementById("newstatement").textContent =
               "Your password must have at least 8 characters";
             isError = true;
             break;
           } else if (
-            arr[i].name == "confirmpassword" &&
+            arr[i].name == "confirm_password" &&
             arr[i].value != document.getElementById("confirm-password").value
           ) {
             document.getElementById("newstatement").textContent =
@@ -128,16 +132,13 @@
           }
         }
         if (isError == false) {
-          let email = document.getElementById("email");
-          let password = document.getElementById("password");
-          let username = document.getElementById("user_name");
-          localStorage.setItem("email", email.value);
-          localStorage.setItem("password", password.value);
-          localStorage.setItem("username", username.value);
-
-          window.location.href = "login.html";
+          return true;
+        } else {
+          document.getElementById("newstatement").style.display = "block";
+          return false;
         }
       }
+
       // pssword see
       let password = document.getElementById("password");
       let confirmpsw = document.getElementById("confirm-password");

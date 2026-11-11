@@ -42,7 +42,7 @@
         </div>
       </div>
       <!--  text div -->
-      <div class="logininfo">
+      <form class="logininfo" action="login.php" method="POST">
         <h1>Welcome</h1>
         <div class="sub">Sign in to continue your EQ journey</div>
 
@@ -62,7 +62,7 @@
           <i class="fa-solid fa-eye" onclick="hidepasswrd()"></i>
         </div>
         <a href="forget password.html" class="forgetpsw">forget Password?</a>
-        <button id="login" onclick="gotohome()" type="submit">Login</button>
+        <button id="login" type="submit">Login</button>
         <p
           style="text-align: left; color: rgb(228, 173, 173)"
           id="errormsg"
@@ -73,7 +73,7 @@
             >Register</a
           >
         </p>
-      </div>
+      </form>
     </div>
     <script src="login.js"></script>
   </body>
