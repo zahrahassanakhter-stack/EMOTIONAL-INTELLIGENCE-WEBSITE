@@ -1,168 +1,126 @@
-let questions_array = document.getElementsByClassName("question");
-let questionCount = document.getElementById("question_count");
-let bar_level = document.getElementsByClassName("fill");
-let quizquestions = document.getElementById("quiz-questions");
-let backbtn = document.getElementsByClassName("backtoold")[0];
-let nextbtn = document.getElementsByClassName("nextstatement")[0];
+let questions = [];
+let currentQuestion = 0;
+let answers = {};
 
-let questionbank = [
-  "1. I understand my emotions as they happen in real time.",
-  "2. I can stay calm under pressure and high-stress situations.",
-  "3. I pick up on the emotions of others without them saying anything.",
-  "4. I adjust my communication style based on who I'm talking to.",
-  "5. I can identify what triggers my negative emotional reactions.",
-  "6. I take responsibility for my emotional reactions rather than blaming others.",
-  "7. I listen actively without interrupting or planning my response.",
-  "8. I recover quickly after emotional setbacks or disappointments.",
-  "9. I feel comfortable expressing my emotions in appropriate settings.",
-  "10. I notice when others are uncomfortable even if they don't say so.",
-  "11. I can delay gratification to achieve longer-term goals.",
-  "12. I maintain positive relationships even during conflict.",
-  "13. I reflect on my emotions and what they tell me about myself.",
-  "14. I adapt well to unexpected changes or new situations.",
-  "15. I motivate myself even when tasks feel difficult or boring.",
-];
+const questionText = document.getElementById("quiz-questions");
+const questionCount = document.getElementById("question_count");
+const progressBar = document.querySelector(".fill");
+const backBtn = document.querySelector(".backtoold");
+const nextBtn = document.querySelector(".nextstatement");
+const radioButtons = document.querySelectorAll('.question input[type="radio"]');
+const optionSpans = document.querySelectorAll(".question label span");
 
-let count = 0;
-let currentquestion = 0;
-let answers = [];
+async function loadQuestions() {
+  try {
+    const response = await fetch("initial-quiz.php?action=questions");
+    const data = await response.json();
 
-quizquestions.textContent = questionbank[0];
-for (let i = 0; i < questionbank.length; i++) {
-  answers[i] = false;
+    if (!response.ok) {
+      throw new Error(data.error || "Could not load questions.");
+    }
+
+    questions = data.questions;
+    showQuestion();
+  } catch (error) {
+    alert(error.message);
+  }
 }
 
-nextbtn.addEventListener("click", nextstatement);
-function nextstatement() {
-  if (answers[currentquestion] == false) {
+function showQuestion() {
+  const q = questions[currentQuestion];
+
+  questionText.textContent = q.question_text;
+
+  questionCount.textContent = currentQuestion + 1;
+
+  progressBar.style.width =
+    ((currentQuestion + 1) / questions.length) * 100 + "%";
+
+  backBtn.disabled = currentQuestion === 0;
+
+  nextBtn.textContent =
+    currentQuestion === questions.length - 1 ? "Submit" : "Next";
+
+  radioButtons.forEach((radio, index) => {
+    const value = Number(q.scale_min) + index;
+
+    radio.value = value;
+    radio.disabled = value > Number(q.scale_max);
+    radio.checked = Number(answers[q.question_id]) === value;
+
+    optionSpans[index].style.background = radio.checked
+      ? "rgba(45,80,22,0.06)"
+      : "none";
+
+    optionSpans[index].style.border = radio.checked
+      ? "1px solid #2d5016"
+      : "1px solid #ccc";
+  });
+}
+
+// Save selected answer
+radioButtons.forEach((radio) => {
+  radio.addEventListener("change", function () {
+    const q = questions[currentQuestion];
+
+    answers[q.question_id] = Number(this.value);
+
+    showQuestion();
+  });
+});
+
+// Next or Submit
+nextBtn.addEventListener("click", async function () {
+  const q = questions[currentQuestion];
+
+  if (answers[q.question_id] === undefined) {
+    alert("Please select an answer first.");
     return;
   }
-  if (currentquestion < questionbank.length - 1) {
-    currentquestion++;
-    quizquestions.textContent = questionbank[currentquestion];
-    progressbarincrease(count++);
-  }
-  for (let i = 0; i < questions_array.length; i++) {
-    let span_array = questions_array[i].querySelectorAll("span");
-    for (let j = 0; j < span_array.length; j++) {
-      span_array[j].style.background = "none";
-      span_array[j].style.border = "1px solid #ccc"; // Default border
-    }
-  }
-}
-backbtn.addEventListener("click", previousstatement);
-function previousstatement() {
-  if (currentquestion > 0) {
-    currentquestion--;
-    quizquestions.textContent = questionbank[currentquestion];
-    progressbarincrease(count--);
-  }
-}
-// progress bar increase kro
 
-let span_array = document.querySelectorAll("span");
-for (let j = 0; j < span_array.length; j++) {
-  span_array[j].addEventListener("click", () => {
-    for (let k = 0; k < span_array.length; k++) {
-      span_array[k].style.background = "none";
-      span_array[k].style.border = "1px solid #ccc"; // Default border
-    }
-    span_array[j].style.border = "1px solid #2d5016";
-    span_array[j].style.background = " rgba(45,80,22,0.06)";
-    if (answers[currentquestion] == false) {
-      answers[currentquestion] = j;
-    }
-  });
-}
-
-function progressbarincrease() {
-  let percentage = (count / questionbank.length) * 100;
-  questionCount.textContent = count;
-  bar_level[0].style.width = percentage + "%";
-}
-
-// submit button
-let submit = document.getElementsByClassName("submit")[0];
-submit.addEventListener("click", () => {
-  window.location.href = "dashboard.html";
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    await submitQuiz();
+  }
 });
 
-// 👇 yahan se tumhara purana quiz code start hoga
-document.addEventListener("DOMContentLoaded", function () {
-  // all questions
-  const allQuestions = document.querySelectorAll(".question");
-  const submitBtn = document.querySelector(".submit");
+// Back button
+backBtn.addEventListener("click", function () {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion();
+  }
+});
 
-  // score storage
-  let scores = {
-    self: 0,
-    regulation: 0,
-    empathy: 0,
-    social: 0,
-  };
+// Send answers to PHP
+async function submitQuiz() {
+  nextBtn.disabled = true;
 
-  // each question category mapping
-  const questionType = [
-    "self",
-    "self",
-    "self",
-    "self",
-    "regulation",
-    "regulation",
-    "regulation",
-    "regulation",
-    "empathy",
-    "empathy",
-    "empathy",
-    "empathy",
-    "social",
-    "social",
-    "social",
-  ];
-
-  // track if question already answered
-  let isAnswered = new Array(15).fill(false);
-
-  // loop through questions
-  allQuestions.forEach((question, index) => {
-    let options = question.querySelectorAll("input");
-
-    options.forEach((option, optionIndex) => {
-      option.addEventListener("click", function () {
-        // only first selection counts
-        if (isAnswered[index] === false) {
-          isAnswered[index] = true;
-
-          // value based scoring (1 to 5)
-          let points = optionIndex + 1;
-
-          let category = questionType[index];
-
-          scores[category] += points;
-        }
-      });
+  try {
+    const response = await fetch("initial-quiz.php?action=submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        answers: answers,
+      }),
     });
-  });
 
-  // submit button click
-  submitBtn.addEventListener("click", function () {
-    // convert to percentage
-    let selfScore = (scores.self / 20) * 100;
-    let regScore = (scores.regulation / 20) * 100;
-    let empScore = (scores.empathy / 20) * 100;
-    let socScore = (scores.social / 15) * 100;
+    const data = await response.json();
 
-    // store in browser
-    localStorage.setItem("self", selfScore);
-    localStorage.setItem("regulation", regScore);
-    localStorage.setItem("empathy", empScore);
-    localStorage.setItem("social", socScore);
+    if (!response.ok) {
+      throw new Error(data.error || "Could not submit quiz.");
+    }
 
-    // total average score
-    let totalScore = (selfScore + regScore + empScore + socScore) / 4;
-    localStorage.setItem("total", totalScore);
+    window.location.href = "dashboard.html";
+  } catch (error) {
+    alert(error.message);
+    nextBtn.disabled = false;
+  }
+}
 
-    // go to dashboard
-    // window.location.href = "dashboard.html";
-  });
-});
+// Start quiz
+loadQuestions();
