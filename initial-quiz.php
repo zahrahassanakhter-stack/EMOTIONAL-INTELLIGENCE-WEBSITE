@@ -1,3 +1,4 @@
+
 <?php
 require_once __DIR__ . "/initiate.php";
 session_start();
@@ -70,8 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'questions') {
         );
 
         // Fetch ONLY questions with IDs 1 to 30
+        // Use section instead of domain
         $result = $conn->query(
-            "SELECT question_id, question_text, domain,
+            "SELECT question_id, question_text, section,
                     scale_min, scale_max, is_reverse
              FROM questions
              WHERE question_id BETWEEN 1 AND 30"
@@ -129,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'questions') {
     $idList = implode(",", array_map('intval', $ids));
 
     $result = $conn->query(
-        "SELECT question_id, question_text, domain,
+        "SELECT question_id, question_text, section,
                 scale_min, scale_max, is_reverse
          FROM questions
          WHERE question_id IN ($idList)"
@@ -231,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
         $idList = implode(",", array_map('intval', $ids));
 
         $result = $conn->query(
-            "SELECT question_id, domain, scale_min,
+            "SELECT question_id, section, scale_min,
                     scale_max, is_reverse
              FROM questions
              WHERE question_id IN ($idList)"
@@ -245,6 +247,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
 
         while ($row = $result->fetch_assoc()) {
             $questionData[$row['question_id']] = $row;
+        }
+
+        if (count($questionData) !== 15) {
+            throw new Exception("Some selected questions are missing.");
         }
 
         $domainScores = [];
@@ -266,6 +272,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
 
             $q = $questionData[$id];
 
+            // Use section as category
+            $domain = trim($q['section']);
+
+            // Exclude Demographics and invalid scoring questions
+            if (
+                $domain === "" ||
+                $domain === "Demographics" ||
+                $q['scale_min'] === null ||
+                $q['scale_max'] === null
+            ) {
+                throw new Exception(
+                    "Invalid assessment question: " . $id
+                );
+            }
+
             $rawAnswer = (int) $answers[$id];
 
             $min = (int) $q['scale_min'];
@@ -284,8 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
             $points = $scoreAnswer - $min;
             $possible = $max - $min;
 
-            $domain = $q['domain'];
-
+            // Group scores by section
             if (!isset($domainScores[$domain])) {
                 $domainScores[$domain] = [
                     "total" => 0,
@@ -313,7 +333,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
             }
         }
 
-        // Save domain-wise scores
+        // Save category-wise scores
+        // Database column remains named domain
         $categoryInsert = $conn->prepare(
             "INSERT INTO assessment_category_scores
              (session_id, domain, total_score, max_score)
@@ -373,6 +394,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
             "success" => true,
             "total_score" => $totalScore,
             "max_score" => $maxScore,
+            "categories" => $domainScores,
             "message" => "Quiz submitted successfully."
         ]);
 
@@ -389,4 +411,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit') {
 
 // Invalid request
 sendResponse(["error" => "Invalid request."], 400);
-
