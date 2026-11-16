@@ -1,18 +1,51 @@
 // ===============================
 // PROFILE PICTURE
 // ===============================
-console.log("DASHBOARD JS FILE LOADED");
+
 const user_image = document.getElementById("profile_picture");
 const upload_button = document.getElementById("pictureupload");
 
-upload_button.onchange = function () {
-  let file = upload_button.files[0];
+if (upload_button && user_image) {
+  upload_button.addEventListener("change", async function () {
+    const file = upload_button.files[0];
 
-  if (file) {
-    let url = URL.createObjectURL(file);
-    user_image.src = url;
-  }
-};
+    if (!file) return;
+
+    user_image.src = URL.createObjectURL(file);
+
+    const formData = new FormData();
+    formData.append("profile_picture", file);
+
+    try {
+      const response = await fetch("upload_profile_picture.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const text = await response.text();
+
+      console.log("Upload PHP Response:", text);
+
+      let result;
+
+      try {
+        result = JSON.parse(text);
+      } catch (error) {
+        throw new Error("Invalid upload PHP response: " + text);
+      }
+
+      if (result.success) {
+        user_image.src = result.picture;
+        alert("Profile picture saved successfully!");
+      } else {
+        alert(result.message || "Picture upload failed.");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Upload Error: " + error.message);
+    }
+  });
+}
 
 // ===============================
 // REMARK FUNCTION
@@ -20,9 +53,7 @@ upload_button.onchange = function () {
 
 function getRemark(value) {
   if (value >= 80) return "Strong";
-
   if (value >= 65) return "Good";
-
   if (value >= 40) return "Developing";
 
   return "Needs Improvement";
@@ -33,74 +64,134 @@ function getRemark(value) {
 // ===============================
 
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("Dashboard DOM Loaded!");
   loadDashboardData();
 });
 
 async function loadDashboardData() {
   try {
-    const response = await fetch("get_dashboard_data.php");
+    const apiURL =
+      "http://localhost/IEEE%20EMOTIONAL%20INTELIGENCE/get_dashboard_data.php";
 
-    const data = await response.json();
+    console.log("PAGE URL:", window.location.href);
+    console.log("API URL:", apiURL);
+    console.log("Fetching dashboard data...");
+
+    const response = await fetch(apiURL, {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    console.log("PHP Status:", response.status);
+
+    // Read response only once
+    const responseText = await response.text();
+
+    console.log("PHP Response:", responseText);
+
+    let data;
+
+    try {
+      data = JSON.parse(responseText);
+    } catch (error) {
+      throw new Error("Invalid JSON response from PHP: " + responseText);
+    }
 
     console.log("Dashboard Response:", data);
 
-    // Check login
     if (response.status === 401) {
       window.location.href = "login.html";
       return;
     }
 
+    if (!response.ok) {
+      throw new Error(data.message || "HTTP Error: " + response.status);
+    }
+
     if (!data.success) {
-      alert(data.message);
-      return;
+      throw new Error(data.message || "Unable to fetch dashboard data.");
     }
 
     // ===============================
     // USER PROFILE
     // ===============================
 
-    document.querySelectorAll(".u_name").forEach(function (element) {
-      element.textContent = data.user.full_name;
-    });
+    if (data.user) {
+      document.querySelectorAll(".u_name").forEach(function (element) {
+        element.textContent = data.user.full_name || "";
+      });
 
-    document.getElementById("emailaddress").textContent = data.user.email;
+      const emailElement = document.getElementById("emailaddress");
 
-    document.getElementById("testsTaken").textContent =
-      data.tests_taken + " completed";
+      if (emailElement) {
+        emailElement.textContent = data.user.email || "";
+      }
+
+      if (data.user.profile_picture && user_image) {
+        user_image.src = data.user.profile_picture;
+      }
+    }
+
+    const testsElement = document.getElementById("testsTaken");
+
+    if (testsElement) {
+      testsElement.textContent = (data.tests_taken ?? 0) + " completed";
+    }
 
     // ===============================
     // DEFAULT SCORES
     // ===============================
 
     let total = 0;
-
     let social = 0;
     let regulation = 0;
-    let self = 0;
-    let empathy = 0;
+    let openMindedness = 0;
+    let taskPerformance = 0;
 
     // ===============================
-    // FETCH ASSESSMENT SCORES
+    // FETCH CATEGORY SCORES
     // ===============================
 
     if (data.assessment) {
-      total = Number(data.assessment.percentage);
+      total = Number(data.assessment.percentage) || 0;
 
-      data.categories.forEach(function (category) {
-        let domain = category.domain.toLowerCase().replace(/[^a-z]/g, "");
+      let collaborationTotal = 0;
+      let collaborationMax = 0;
 
-        let score = Number(category.percentage);
+      let engagementTotal = 0;
+      let engagementMax = 0;
 
-        if (domain === "socialskills") {
-          social = score;
-        } else if (domain === "emotionalregulation") {
-          regulation = score;
-        } else if (domain === "selfawareness") {
-          self = score;
-        } else if (domain === "empathy") {
-          empathy = score;
+      const categories = data.categories || [];
+
+      categories.forEach(function (category) {
+        let domain = (category.domain || "").trim().toLowerCase();
+
+        let score = Number(category.total_score) || 0;
+        let max = Number(category.max_score) || 0;
+
+        if (domain === "collaboration") {
+          collaborationTotal += score;
+          collaborationMax += max;
+        } else if (domain === "engagement with others") {
+          engagementTotal += score;
+          engagementMax += max;
+        } else if (domain === "emotional regulation") {
+          regulation = max > 0 ? (score / max) * 100 : 0;
+        } else if (domain === "open-mindedness") {
+          openMindedness = max > 0 ? (score / max) * 100 : 0;
+        } else if (domain === "task performance") {
+          taskPerformance = max > 0 ? (score / max) * 100 : 0;
         }
       });
+
+      // COMBINE SOCIAL SKILLS
+
+      let socialMax = collaborationMax + engagementMax;
+
+      social =
+        socialMax > 0
+          ? ((collaborationTotal + engagementTotal) / socialMax) * 100
+          : 0;
     }
 
     // ===============================
@@ -108,19 +199,30 @@ async function loadDashboardData() {
     // ===============================
 
     const circleText = document.querySelector(".circle .inner");
-
     const remarkText = document.querySelector(".scoreremark");
 
-    circleText.textContent = Math.round(total) + "%";
+    // UPDATE CIRCULAR PROGRESS
 
-    remarkText.textContent = getRemark(total);
+    const circle = document.querySelector(".circle");
 
-    // EQ LEVEL
-    document.getElementById("eqlevel").textContent =
-      getRemark(total) + " (" + Math.round(total) + "/100)";
+    if (circle) {
+      const percentage = Math.min(100, Math.max(0, total));
+
+      circle.style.background = `conic-gradient(
+    from -90deg,
+   #5c8a3c 0%,
+ #5c8a3c ${percentage}%,
+    rgb(232, 230, 230) ${percentage}%,
+    rgb(232, 230, 230) 100%
+  )`;
+    }
+
+    if (circleText) {
+      circleText.textContent = Math.round(total) + "%";
+    }
 
     // ===============================
-    // PROGRESS BARS
+    // PROGRESS BAR FUNCTION
     // ===============================
 
     function updateBar(selector, score) {
@@ -131,40 +233,87 @@ async function loadDashboardData() {
       }
     }
 
+    // SOCIAL SKILLS
+
     updateBar(".socialskills .fill", social);
 
-    document.getElementById("score1").textContent = Math.round(social) + "%";
+    const score1 = document.getElementById("score1");
+
+    if (score1) {
+      score1.textContent = Math.round(social) + "%";
+    }
+
+    // EMOTIONAL REGULATION
 
     updateBar(".emotionalregulation .fill", regulation);
 
-    document.getElementById("score2").textContent =
-      Math.round(regulation) + "%";
+    const score2 = document.getElementById("score2");
 
-    updateBar(".awarebar .fill", self);
+    if (score2) {
+      score2.textContent = Math.round(regulation) + "%";
+    }
 
-    document.getElementById("score3").textContent = Math.round(self) + "%";
+    // OPEN-MINDEDNESS
 
-    updateBar(".emphatybar .fill", empathy);
+    updateBar(".awarebar .fill", openMindedness);
 
-    document.getElementById("score4").textContent = Math.round(empathy) + "%";
+    const score3 = document.getElementById("score3");
+
+    if (score3) {
+      score3.textContent = Math.round(openMindedness) + "%";
+    }
+
+    // TASK PERFORMANCE
+
+    updateBar(".emphatybar .fill", taskPerformance);
+
+    const score4 = document.getElementById("score4");
+
+    if (score4) {
+      score4.textContent = Math.round(taskPerformance) + "%";
+    }
 
     // ===============================
     // CATEGORY REMARKS
     // ===============================
 
-    document.querySelector(".emotional-remark").textContent =
-      getRemark(regulation);
+    const emotionalRemark = document.querySelector(".emotional-remark");
 
-    document.querySelector(".discussion-remark").textContent =
-      getRemark(social);
+    if (emotionalRemark) {
+      emotionalRemark.textContent = getRemark(regulation);
+    }
 
-    document.querySelector(".awareness-remark").textContent = getRemark(self);
+    const discussionRemark = document.querySelector(".discussion-remark");
 
-    document.querySelector(".esteem-remark").textContent = getRemark(empathy);
+    if (discussionRemark) {
+      discussionRemark.textContent = getRemark(social);
+    }
+
+    const awarenessRemark = document.querySelector(".awareness-remark");
+
+    if (awarenessRemark) {
+      awarenessRemark.textContent = getRemark(openMindedness);
+    }
+
+    const esteemRemark = document.querySelector(".esteem-remark");
+
+    if (esteemRemark) {
+      esteemRemark.textContent = getRemark(taskPerformance);
+    }
+
+    // ===============================
+    // DEBUG SCORES
+    // ===============================
+
+    console.log("Total Score:", total);
+    console.log("Social Skills:", social);
+    console.log("Emotional Regulation:", regulation);
+    console.log("Open-Mindedness:", openMindedness);
+    console.log("Task Performance:", taskPerformance);
   } catch (error) {
-    console.error("Dashboard Error:", error);
+    console.error("ACTUAL DASHBOARD ERROR:", error);
 
-    alert("Unable to load dashboard data. Please try again.");
+    alert("Dashboard Error:\n" + error.message);
   }
 }
 
@@ -178,7 +327,6 @@ function logout() {
 
 // ===============================
 // AI CONTENT NAVIGATION
-// KEEPING EXISTING FUNCTIONALITY
 // ===============================
 
 function gotoAipage(type) {
@@ -190,15 +338,17 @@ function gotoAipage(type) {
 // ===============================
 
 let navbar = document.getElementById("menuitem");
-
 let nav = document.getElementsByTagName("nav")[0];
-
 let removebar = document.getElementById("cross");
 
-navbar.addEventListener("click", () => {
-  nav.style.transform = "translateX(-160px)";
-});
+if (navbar && nav) {
+  navbar.addEventListener("click", () => {
+    nav.style.transform = "translateX(-160px)";
+  });
+}
 
-removebar.addEventListener("click", () => {
-  nav.style.transform = "translateX(0)";
-});
+if (removebar && nav) {
+  removebar.addEventListener("click", () => {
+    nav.style.transform = "translateX(0)";
+  });
+}

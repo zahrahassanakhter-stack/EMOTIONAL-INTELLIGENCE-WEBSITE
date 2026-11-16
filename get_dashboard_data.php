@@ -2,6 +2,9 @@
 <?php
 
 header("Content-Type: application/json");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -29,7 +32,7 @@ $user_id = (int) $_SESSION['user_id'];
 
 // Fetch user profile
 $stmt = $conn->prepare(
-    "SELECT full_name, email
+    "SELECT full_name, email, profile_picture
      FROM users
      WHERE user_id = ?
      LIMIT 1"
@@ -58,9 +61,10 @@ if (!$user) {
 $stmt = $conn->prepare(
     "SELECT COUNT(*) AS total
      FROM assessment_sessions
-     WHERE user_id = ? AND is_complete = 1"
+     WHERE user_id = ?
+     AND is_complete = 1
+     AND completed_at IS NOT NULL"
 );
-
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 
@@ -144,7 +148,8 @@ echo json_encode([
 
     "user" => [
         "full_name" => $user['full_name'],
-        "email" => $user['email']
+        "email" => $user['email'],
+        "profile_picture" => $user['profile_picture']
     ],
 
     "tests_taken" => $tests_taken,
