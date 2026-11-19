@@ -47,6 +47,7 @@ body {
     );
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* welcome page */
@@ -467,6 +468,9 @@ button:hover {
 .bannerbox {
   width: 50%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .bannerbox h1 {
   margin: auto;
@@ -483,7 +487,7 @@ button:hover {
   border-radius: 10px;
 }
 .bannerbox .banerbtn {
-  width: 30%;
+  width: 100%;
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
@@ -1047,7 +1051,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(191, 217, 217);
 }
 .skillbar .fill {
-  background-color: yellow;
+  background: linear-gradient(90deg, #2d5016, #8ab86b);
   width: 0px;
   height: 100%;
 }
@@ -1067,7 +1071,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(191, 217, 217);
 }
 .regulationbar .fill {
-  background-color: rgb(42, 9, 140);
+  background: linear-gradient(90deg, #2d5016, #8ab86b);
   width: 1%;
   height: 100%;
 }
@@ -1086,7 +1090,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(191, 217, 217);
 }
 .awarebar .fill {
-  background-color: #0c2b05;
+  background: linear-gradient(90deg, #2d5016, #8ab86b);
   height: 100%;
   width: 1%;
 }
@@ -1106,7 +1110,7 @@ h4 input[type="checkbox"] {
   background-color: rgb(191, 217, 217);
 }
 .emphatybar .fill {
-  background-color: #0a3f59;
+  background: linear-gradient(90deg, #2d5016, #8ab86b);
   height: 100%;
   width: 1%;
 }
@@ -1127,7 +1131,10 @@ h4 input[type="checkbox"] {
   margin: 10px auto;
   width: 140px;
   height: 140px;
-  background: conic-gradient(var(--btncolor) 0%, rgb(232, 230, 230) 2%);
+  background: conic-gradient(
+    linear-gradient(90deg, #2d5016, #8ab86b) 0%,
+    rgb(232, 230, 230) 2%
+  );
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1145,7 +1152,7 @@ h4 input[type="checkbox"] {
   align-items: center;
   font-size: 28px;
   font-weight: bold;
-  color: var(--btnfontcolor);
+  color: #1a2e14;
 }
 .scores p {
   color: var(--dashboard-color);
